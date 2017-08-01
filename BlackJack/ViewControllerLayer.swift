@@ -16,4 +16,21 @@ extension ViewController {
         backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
+    
+    func setUpMenuButtons() {
+        //Set up buttons stack view
+        self.view.addSubview(buttonsStackView)
+        buttonsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        buttonsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            
+        //Set up play button
+        buttonsStackView.addArrangedSubview(playButton)
+        playButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        playButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        //Set up credits button
+        buttonsStackView.addArrangedSubview(creditsButton)
+        creditsButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        creditsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
 }
