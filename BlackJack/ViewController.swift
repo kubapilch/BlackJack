@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         return button
     }()
     
-    
     let playButton: UIButton = {
         var button = UIButton()
         button.backgroundColor = UIColor.black
@@ -54,7 +53,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Hide top bar
         self.navigationController?.isNavigationBarHidden = true
     
