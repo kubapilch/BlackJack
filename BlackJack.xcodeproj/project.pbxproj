@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2F85B01F320A4C0019DA84 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F85AF1F320A4C0019DA84 /* Timer.swift */; };
 		8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */; };
 		8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CC1F2FDD4800CA56C8 /* ViewController.swift */; };
 		8CAE54D21F2FDD4800CA56C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CAE54D11F2FDD4800CA56C8 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C2F85AF1F320A4C0019DA84 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		8CAE54C71F2FDD4800CA56C8 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CAE54CC1F2FDD4800CA56C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				8CB697411F314478000A0462 /* Card.swift */,
+				8C2F85AF1F320A4C0019DA84 /* Timer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			files = (
 				8CB35A9F1F30BE980048C3A8 /* GameViewControllerLayer.swift in Sources */,
 				8CB697421F314478000A0462 /* Card.swift in Sources */,
+				8C2F85B01F320A4C0019DA84 /* Timer.swift in Sources */,
 				8CD979551F30792000190CB2 /* GameViewController.swift in Sources */,
 				8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */,
 				8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */,

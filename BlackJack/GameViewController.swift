@@ -10,6 +10,9 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    let playerTimer = Timer()
+    let opponentTimer = Timer()
+    
     let gameBackgroundImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "game background")
@@ -48,6 +51,9 @@ class GameViewController: UIViewController {
     var  playerCardsOnBoard:[Card] = []
     var opponentCardsOnBoard:[Card] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.isStatusBarHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,5 +65,8 @@ class GameViewController: UIViewController {
         
         //Set up cards imageViews
         setUpCardsImageViews()
+        
+        //Set up timers
+        setUpTimers()
     }
 }

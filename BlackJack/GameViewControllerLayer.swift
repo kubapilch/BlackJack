@@ -60,4 +60,24 @@ extension GameViewController {
             opponentCardsStackView.addArrangedSubview(card)
         }
     }
+    
+    func setUpTimers() {
+        //Set up player timer
+        self.view.addSubview(playerTimer)
+        playerTimer.translatesAutoresizingMaskIntoConstraints = false
+        playerTimer.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+        playerTimer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        playerTimer.time = 10
+    
+        //Set up opponent player
+        self.view.addSubview(opponentTimer)
+        opponentTimer.translatesAutoresizingMaskIntoConstraints = false
+        opponentTimer.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
+        opponentTimer.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        opponentTimer.time = 8
+    }
+    
+    func setUpBottomBar() {
+        
+    }
 }

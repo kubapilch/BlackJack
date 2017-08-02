@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         //Hide top bar
         self.navigationController?.isNavigationBarHidden = true
     
-        //Set up background image view
+        //Set up background image viewTy też płać mniej w Play! Przenieś numer!
         setUpBackgroundImageView()
     
         //Set up menu stack view and menu buttons

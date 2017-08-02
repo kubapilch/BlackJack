@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
         window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        UIApplication.shared.statusBarStyle = .lightContent
         return true
     }
 
