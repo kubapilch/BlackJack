@@ -7,11 +7,75 @@
 //
 
 import UIKit
+import CoreGraphics
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UIGestureRecognizerDelegate{
     
     let playerTimer = Timer()
     let opponentTimer = Timer()
+    
+    let playerStartCardsView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let opponentStartCardsView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let bottomBarView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.black
+        return view
+    }()
+    
+    let line1: UIView = {
+        let lin = UIView()
+        lin.translatesAutoresizingMaskIntoConstraints = false
+        lin.backgroundColor = UIColor.white
+        var anchor = lin.widthAnchor.constraint(equalToConstant: 1)
+        anchor.priority = 1000
+        anchor.isActive = true
+        return lin
+    }()
+    
+    let moreLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Roboto", size: 15)
+        label.text = "More"
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(GameViewController.test))
+        label.addGestureRecognizer(tap)
+        tap.delegate = self as? UIGestureRecognizerDelegate
+        return label
+    }()
+
+    func test(sender:UITapGestureRecognizer) {
+        print("test")
+    }
+    
+    let checkLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Roboto", size: 15)
+        label.text = "Check"
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = true
+        var tap = UITapGestureRecognizer(target: self, action: #selector(GameViewController.test))
+        tap.delegate = self as? UIGestureRecognizerDelegate
+        label.addGestureRecognizer(tap)
+        return label
+    }()
+    
+    
     
     let gameBackgroundImageView: UIImageView = {
         var imageView = UIImageView()
@@ -48,8 +112,10 @@ class GameViewController: UIViewController {
         return stack
     }()
     
-    var  playerCardsOnBoard:[Card] = []
+    var playerCardsOnBoard:[Card] = []
     var opponentCardsOnBoard:[Card] = []
+    var playerStartCards:[Card] = []
+    var opponentStartCards:[Card] = []
     
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.isStatusBarHidden = true
@@ -66,7 +132,13 @@ class GameViewController: UIViewController {
         //Set up cards imageViews
         setUpCardsImageViews()
         
+        //Set up bottom bar
+        layoutBottomBarView()
+    
         //Set up timers
         setUpTimers()
+        
+        //Set all tarter cards
+        setUpAllStartCardsViews()
     }
 }

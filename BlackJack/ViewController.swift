@@ -61,6 +61,9 @@ class ViewController: UIViewController {
     
         //Set up menu stack view and menu buttons
         setUpMenuButtons()
+    
+        let loginView = LoginViewController()
+        present(loginView, animated: true, completion: nil)
     }
 }
 

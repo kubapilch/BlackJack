@@ -42,6 +42,7 @@ class Card: UIView{
         backImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         backImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         backImageView.alpha = 0
+        backImageView.image = UIImage(named: "back")
     }
     
     override init(frame: CGRect) {

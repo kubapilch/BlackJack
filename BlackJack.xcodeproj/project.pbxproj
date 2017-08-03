@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C2F85B01F320A4C0019DA84 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F85AF1F320A4C0019DA84 /* Timer.swift */; };
+		8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A9ACA1F33B874007D112B /* LoginViewController.swift */; };
 		8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */; };
 		8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CC1F2FDD4800CA56C8 /* ViewController.swift */; };
 		8CAE54D21F2FDD4800CA56C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CAE54D11F2FDD4800CA56C8 /* Assets.xcassets */; };
@@ -16,10 +17,13 @@
 		8CB35A9F1F30BE980048C3A8 /* GameViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB35A9E1F30BE980048C3A8 /* GameViewControllerLayer.swift */; };
 		8CB697421F314478000A0462 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB697411F314478000A0462 /* Card.swift */; };
 		8CD979551F30792000190CB2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD979541F30792000190CB2 /* GameViewController.swift */; };
+		8CDC5A161F33C27100164C83 /* LoginViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */; };
+		8CDC5A181F33CB3700164C83 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC5A171F33CB3700164C83 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8C2F85AF1F320A4C0019DA84 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		8C4A9ACA1F33B874007D112B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8CAE54C71F2FDD4800CA56C8 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CAE54CC1F2FDD4800CA56C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +34,8 @@
 		8CB35A9E1F30BE980048C3A8 /* GameViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewControllerLayer.swift; sourceTree = "<group>"; };
 		8CB697411F314478000A0462 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8CD979541F30792000190CB2 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerLayer.swift; sourceTree = "<group>"; };
+		8CDC5A171F33CB3700164C83 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 			children = (
 				8CAE54E01F2FE61600CA56C8 /* ViewControllerLayer.swift */,
 				8CB35A9E1F30BE980048C3A8 /* GameViewControllerLayer.swift */,
+				8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */,
 			);
 			name = layers;
 			sourceTree = "<group>";
@@ -95,6 +102,7 @@
 			children = (
 				8CB697411F314478000A0462 /* Card.swift */,
 				8C2F85AF1F320A4C0019DA84 /* Timer.swift */,
+				8CDC5A171F33CB3700164C83 /* CustomTextField.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -104,6 +112,7 @@
 			children = (
 				8CAE54CC1F2FDD4800CA56C8 /* ViewController.swift */,
 				8CD979541F30792000190CB2 /* GameViewController.swift */,
+				8C4A9ACA1F33B874007D112B /* LoginViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -184,8 +193,11 @@
 				8CB697421F314478000A0462 /* Card.swift in Sources */,
 				8C2F85B01F320A4C0019DA84 /* Timer.swift in Sources */,
 				8CD979551F30792000190CB2 /* GameViewController.swift in Sources */,
+				8CDC5A181F33CB3700164C83 /* CustomTextField.swift in Sources */,
+				8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */,
 				8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */,
 				8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */,
+				8CDC5A161F33C27100164C83 /* LoginViewControllerLayer.swift in Sources */,
 				8CAE54E11F2FE61600CA56C8 /* ViewControllerLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
