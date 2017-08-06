@@ -100,22 +100,37 @@ extension GameViewController {
         line1.bottomAnchor.constraint(equalTo: bottomBarView.bottomAnchor, constant: -5).isActive = true
         
         //Set up more label
-        bottomBarView.addSubview(moreLabel)
-        let leftAnchorOfMoreLabel = moreLabel.leftAnchor.constraint(equalTo: line1.rightAnchor, constant: 5)
+        bottomBarView.addSubview(moreButton)
+        let leftAnchorOfMoreLabel = moreButton.leftAnchor.constraint(equalTo: line1.rightAnchor, constant: 5)
         leftAnchorOfMoreLabel.priority = 750
         leftAnchorOfMoreLabel.isActive = true
-        moreLabel.rightAnchor.constraint(equalTo: bottomBarView.rightAnchor, constant: -5).isActive = true
-        moreLabel.centerYAnchor.constraint(equalTo: bottomBarView.centerYAnchor).isActive = true
-        moreLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        moreButton.rightAnchor.constraint(equalTo: bottomBarView.rightAnchor, constant: -5).isActive = true
+        moreButton.centerYAnchor.constraint(equalTo: bottomBarView.centerYAnchor).isActive = true
+        moreButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         //Set up check label
-        bottomBarView.addSubview(checkLabel)
-        checkLabel.leftAnchor.constraint(equalTo: bottomBarView.leftAnchor, constant: 5).isActive = true
-        let rightAnchorOfCheckLabel =  checkLabel.rightAnchor.constraint(equalTo: line1.leftAnchor, constant: -5)
+        bottomBarView.addSubview(checkButton)
+        checkButton.leftAnchor.constraint(equalTo: bottomBarView.leftAnchor, constant: 5).isActive = true
+        let rightAnchorOfCheckLabel =  checkButton.rightAnchor.constraint(equalTo: line1.leftAnchor, constant: -5)
         rightAnchorOfCheckLabel.priority = 750
         rightAnchorOfCheckLabel.isActive = true
-        checkLabel.centerYAnchor.constraint(equalTo: bottomBarView.centerYAnchor).isActive = true
-        checkLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        checkButton.centerYAnchor.constraint(equalTo: bottomBarView.centerYAnchor).isActive = true
+        checkButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func setUpPlayersLabels() {
+        self.view.addSubview(userLabel)
+        userLabel.bottomAnchor.constraint(equalTo: playerStartCardsView.topAnchor, constant: -10).isActive = true
+        userLabel.centerXAnchor.constraint(equalTo: playerStartCardsView.centerXAnchor).isActive = true
+        userLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        userLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        //Opponent label
+        self.view.addSubview(opponentLabel)
+        opponentLabel.topAnchor.constraint(equalTo: opponentStartCardsView.bottomAnchor, constant: 10).isActive = true
+        opponentLabel.centerXAnchor.constraint(equalTo: opponentStartCardsView.centerXAnchor).isActive = true
+        opponentLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        opponentLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func setUpStackViews() {
@@ -167,7 +182,7 @@ extension GameViewController {
         playerTimer.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
         playerTimer.bottomAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: -5).isActive = true
         playerTimer.time = 10
-    
+        
         //Set up opponent player
         self.view.addSubview(opponentTimer)
         opponentTimer.translatesAutoresizingMaskIntoConstraints = false

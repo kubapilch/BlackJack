@@ -34,5 +34,9 @@ extension ViewController {
         buttonsStackView.addArrangedSubview(creditsButton)
         //creditsButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         creditsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    
+        //Set up logout button
+        buttonsStackView.addArrangedSubview(logoutButton)
+        logoutButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
