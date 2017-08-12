@@ -9,8 +9,13 @@
 import Foundation
 import CoreGraphics
 import UIKit
+import Firebase
 
 extension GameViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.isStatusBarHidden = true
+    }
     
     func setUpBackgroundView() {
         self.view.addSubview(gameBackgroundImageView)
@@ -53,7 +58,6 @@ extension GameViewController {
             opponentStartCardsView.addSubview(card)
             card.heightAnchor.constraint(equalToConstant: 68).isActive = true
             card.widthAnchor.constraint(equalToConstant: 44).isActive = true
-            card.setFrontImageView(name: "ace")
             card.centerYAnchor.constraint(equalTo: opponentStartCardsView.centerYAnchor).isActive = true
             card.isUpSideDown = true
             if i == 0 {
@@ -66,6 +70,22 @@ extension GameViewController {
         }
     }
     
+    func setLabels() {
+        //Get user name
+        let ref = Database.database().reference().child("users")
+        ref.child(playerUid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.value as! [String:String]
+            self.playerName = data["Name"]
+        })
+        
+        //Get opponent name
+        ref.child(opponentUid!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.value as! [String:String]
+            self.opponentName = data["Name"]
+        })
+        
+    }
+    
     private func addStartCardsToPlayerCardView() {
         for i in 0...1 {
             let card = Card()
@@ -73,7 +93,6 @@ extension GameViewController {
             playerStartCardsView.addSubview(card)
             card.heightAnchor.constraint(equalToConstant: 68).isActive = true
             card.widthAnchor.constraint(equalToConstant: 44).isActive = true
-            card.setFrontImageView(name: "ace")
             card.centerYAnchor.constraint(equalTo: playerStartCardsView.centerYAnchor).isActive = true
             if i == 0 {
                 card.transform = CGAffineTransform(rotationAngle:  -(CGFloat.pi / 12))
@@ -159,7 +178,7 @@ extension GameViewController {
             let card = Card()
             card.heightAnchor.constraint(equalToConstant: 76).isActive = true
             card.widthAnchor.constraint(equalToConstant: 49).isActive = true
-            card.setFrontImageView(name: "ace")
+            card.rank = 14
             playerCardsOnBoard.append(card)
             playerCardsStackView.addArrangedSubview(card)
         }
@@ -168,7 +187,7 @@ extension GameViewController {
             let card = Card()
             card.heightAnchor.constraint(equalToConstant: 76).isActive = true
             card.widthAnchor.constraint(equalToConstant: 49).isActive = true
-            card.setFrontImageView(name: "ace")
+            card.rank = 14
             card.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
             opponentCardsOnBoard.append(card)
             opponentCardsStackView.addArrangedSubview(card)

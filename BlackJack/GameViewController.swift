@@ -12,17 +12,35 @@ import Firebase
 
 class GameViewController: UIViewController, UIGestureRecognizerDelegate{
     
+    // Enumeration variables
     enum type {
         case server
         case client
     }
-    
     var side: type?
+    
+    
+    //All cards arrays
+    var playerCardsOnBoard:[Card] = []
+    var opponentCardsOnBoard:[Card] = []
+    var playerStartCards:[Card] = []
+    var opponentStartCards:[Card] = []
+    var cards = [Card]()
+    
+    
+    //All references
+    var ref:DatabaseReference?
     var opponentUid: String?
     var playerUid: String?
     var gameRoomReference:String?
+    
+    
+    //Timers
     let playerTimer = Timer()
     let opponentTimer = Timer()
+    
+    
+    //Players names variables
     var playerName: String? {
         didSet{
             userLabel.text = playerName
@@ -35,6 +53,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     
     
+    //Players names labels
     let userLabel: UILabel = {
         var label = UILabel()
         label.textColor = UIColor.white
@@ -53,6 +72,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         return label
     }()
     
+    
+    //Starting cards stack views
     let playerStartCardsView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +86,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         return view
     }()
     
+    
+    //Bottom bar
     let bottomBarView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -89,14 +112,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         but.setTitle("More", for: .normal)
         but.titleLabel?.textColor = UIColor.white
         but.isUserInteractionEnabled = true
-        but.addTarget(self, action: #selector(test), for: .touchUpInside)
+        //but.addTarget(self, action: #selector(test), for: .touchUpInside)
         return but
     }()
 
-    func test() {
-        print("test")
-    }
-    
     let checkButton: UIButton = {
         var but = UIButton()
         but.translatesAutoresizingMaskIntoConstraints = false
@@ -104,10 +123,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         but.setTitle("Check", for: .normal)
         but.titleLabel?.textColor = UIColor.white
         but.isUserInteractionEnabled = true
-        but.addTarget(self, action: #selector(test), for: .touchUpInside)
+        //but.addTarget(self, action: #selector(test), for: .touchUpInside)
         return but
     }()
-
+    
+    
+    //Background image
     let gameBackgroundImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(named: "game background")
@@ -116,6 +137,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         return imageView
     }()
     
+    
+    //On table stack views
     let playerCardsStackView:UIStackView = {
         var stack = UIStackView()
         stack.axis = .horizontal
@@ -143,53 +166,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         return stack
     }()
     
-    var playerCardsOnBoard:[Card] = []
-    var opponentCardsOnBoard:[Card] = []
-    var playerStartCards:[Card] = []
-    var opponentStartCards:[Card] = []
-    
-    func setLabels() {
-        //Get user name
-        let ref = Database.database().reference().child("users")
-        ref.child(playerUid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let data = snapshot.value as! [String:String]
-            self.playerName = data["Name"]
-        })
-        
-        //Get opponent name
-        ref.child(opponentUid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let data = snapshot.value as! [String:String]
-            self.opponentName = data["Name"]
-        })
-    
-    }
-    
-    func setThatUserIsReady() {
-        if side == .server {
-            let ref = Database.database().reference().child("games room").child("\(playerUid!)\(opponentUid!)")
-            ref.updateChildValues(["playerOneReady":"true"])
-        }else {
-            let ref = Database.database().reference().child("games room").child("\(opponentUid!)\(playerUid!)")
-            ref.updateChildValues(["playerTwoReady":"true"])
-        }
-    }
     
     
-    func setType() {
-        let userDef = UserDefaults.standard
-        if (userDef.value(forKey: "type") as! String) == "server" {
-            side = type.server
-        }else {
-            side = type.client
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        UIApplication.shared.isStatusBarHidden = true
-    }
-    
+    //Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
+        
         //Set up background view
         setUpBackgroundView()
         
@@ -212,6 +196,5 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         setLabels()
         
         setType()
-        setThatUserIsReady()
     }
 } 

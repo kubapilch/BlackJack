@@ -23,12 +23,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return but
     }()
 
-    let registerButton: CustomButton = {
-        var but = CustomButton()
+    let registerButton: UIButton = {
+        var but = UIButton()
+        but.translatesAutoresizingMaskIntoConstraints = false
         but.widthAnchor.constraint(equalToConstant: 274).isActive = true
         but.heightAnchor.constraint(equalToConstant: 45).isActive = true
         but.backgroundColor = UIColor(white: 1, alpha: 0.6)
-        but.setText(text: "Register")
+        but.setTitle("Register", for: .normal)
         but.titleLabel?.font = UIFont(name: "Arial", size: 24)
         but.addTarget(self, action: #selector(checkTextFields), for: .touchUpInside)
         return but

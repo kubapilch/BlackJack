@@ -19,7 +19,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    
     let backImage: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(named: "menuBackgroundImage")
@@ -69,12 +68,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
-    let loginButton: CustomButton = {
-        var but = CustomButton()
+    let loginButton: UIButton = {
+        var but = UIButton()
         but.widthAnchor.constraint(equalToConstant: 274).isActive = true
         but.heightAnchor.constraint(equalToConstant: 45).isActive = true
         but.backgroundColor = UIColor(white: 1, alpha: 0.6)
-        but.setText(text: "Login")
+        but.translatesAutoresizingMaskIntoConstraints = false
+        but.setTitle("Login", for: .normal)
         but.titleLabel?.font = UIFont(name: "Arial", size: 24)
         but.addTarget(self, action: #selector(checktextFields), for: .touchUpInside)
         return but
@@ -103,6 +103,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().signIn(withEmail: mail, password: password) { (user, error) in
             if error != nil {
                 //User ist login
+                self.mailLine.backgroundColor = UIColor.red
+                self.passwordLine.backgroundColor = UIColor.red
                 return
             }
             self.dismiss(animated: true, completion: nil)
@@ -126,10 +128,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
         self.mailField.delegate = self
         self.passwordField.delegate = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

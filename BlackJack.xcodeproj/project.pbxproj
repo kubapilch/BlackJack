@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8C0E2B9A1F34FE1B001105BB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */; };
 		8C0E2B9C1F34FE34001105BB /* RegisterViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */; };
+		8C2DE3261F38CBEF00569B44 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DE3251F38CBEF00569B44 /* Arrays.swift */; };
 		8C2F85B01F320A4C0019DA84 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F85AF1F320A4C0019DA84 /* Timer.swift */; };
 		8C466AE41F37B1D1005E5F70 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C466AE31F37B1D1005E5F70 /* CustomButton.swift */; };
 		8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A9ACA1F33B874007D112B /* LoginViewController.swift */; };
@@ -22,6 +23,9 @@
 		8CB697421F314478000A0462 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB697411F314478000A0462 /* Card.swift */; };
 		8CD979551F30792000190CB2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD979541F30792000190CB2 /* GameViewController.swift */; };
 		8CDC5A161F33C27100164C83 /* LoginViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */; };
+		8CF06F9E1F3F195C00E8F933 /* Serwer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF06F9D1F3F195C00E8F933 /* Serwer.swift */; };
+		8CF06FA01F3F197700E8F933 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF06F9F1F3F197700E8F933 /* Client.swift */; };
+		8CF06FA21F3F1B4F00E8F933 /* Same.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF06FA11F3F1B4F00E8F933 /* Same.swift */; };
 		D38ABDFCEE87B64EF9816B06 /* Pods_BlackJack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E18A7C2EAE91D1AB4D08AC5 /* Pods_BlackJack.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +35,7 @@
 		8303081B1A1C919E1932A306 /* Pods-BlackJack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackJack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BlackJack/Pods-BlackJack.debug.xcconfig"; sourceTree = "<group>"; };
 		8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerLayer.swift; sourceTree = "<group>"; };
+		8C2DE3251F38CBEF00569B44 /* Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
 		8C2F85AF1F320A4C0019DA84 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		8C466AE31F37B1D1005E5F70 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		8C4A9ACA1F33B874007D112B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +51,9 @@
 		8CB697411F314478000A0462 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8CD979541F30792000190CB2 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerLayer.swift; sourceTree = "<group>"; };
+		8CF06F9D1F3F195C00E8F933 /* Serwer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serwer.swift; sourceTree = "<group>"; };
+		8CF06F9F1F3F197700E8F933 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		8CF06FA11F3F1B4F00E8F933 /* Same.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Same.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,11 +101,9 @@
 				8CB697401F31445D000A0462 /* Models */,
 				8CD979531F3078F100190CB2 /* ViewControllers */,
 				8CAE54DC1F2FE53A00CA56C8 /* extensions */,
-				8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */,
-				8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */,
+				8CF06FA41F3F1D3500E8F933 /* Other files */,
 				8CAE54D11F2FDD4800CA56C8 /* Assets.xcassets */,
 				8CAE54D31F2FDD4800CA56C8 /* LaunchScreen.storyboard */,
-				8CAE54D61F2FDD4800CA56C8 /* Info.plist */,
 			);
 			path = BlackJack;
 			sourceTree = "<group>";
@@ -105,7 +111,9 @@
 		8CAE54DC1F2FE53A00CA56C8 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8CF06F9C1F3F192E00E8F933 /* PlayersInGameFunctions */,
 				8CAE54DF1F2FE5FC00CA56C8 /* layers */,
+				8CF06FA31F3F1D0600E8F933 /* Swift components extensions */,
 			);
 			name = extensions;
 			sourceTree = "<group>";
@@ -140,6 +148,34 @@
 				8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8CF06F9C1F3F192E00E8F933 /* PlayersInGameFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				8CF06F9D1F3F195C00E8F933 /* Serwer.swift */,
+				8CF06F9F1F3F197700E8F933 /* Client.swift */,
+				8CF06FA11F3F1B4F00E8F933 /* Same.swift */,
+			);
+			name = PlayersInGameFunctions;
+			sourceTree = "<group>";
+		};
+		8CF06FA31F3F1D0600E8F933 /* Swift components extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8C2DE3251F38CBEF00569B44 /* Arrays.swift */,
+			);
+			name = "Swift components extensions";
+			sourceTree = "<group>";
+		};
+		8CF06FA41F3F1D3500E8F933 /* Other files */ = {
+			isa = PBXGroup;
+			children = (
+				8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */,
+				8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */,
+				8CAE54D61F2FDD4800CA56C8 /* Info.plist */,
+			);
+			name = "Other files";
 			sourceTree = "<group>";
 		};
 		C045A0BABD6D1B6E28767A08 /* Frameworks */ = {
@@ -282,10 +318,14 @@
 				8CD979551F30792000190CB2 /* GameViewController.swift in Sources */,
 				8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */,
 				8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */,
+				8CF06FA01F3F197700E8F933 /* Client.swift in Sources */,
 				8C466AE41F37B1D1005E5F70 /* CustomButton.swift in Sources */,
 				8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */,
+				8CF06FA21F3F1B4F00E8F933 /* Same.swift in Sources */,
 				8CDC5A161F33C27100164C83 /* LoginViewControllerLayer.swift in Sources */,
+				8C2DE3261F38CBEF00569B44 /* Arrays.swift in Sources */,
 				8CAE54E11F2FE61600CA56C8 /* ViewControllerLayer.swift in Sources */,
+				8CF06F9E1F3F195C00E8F933 /* Serwer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

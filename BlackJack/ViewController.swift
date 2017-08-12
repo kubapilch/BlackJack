@@ -38,7 +38,6 @@ class ViewController: UIViewController {
     }
     
     var side: type?
-    
     var userUid: String?
     var opponentUid: String?
     
@@ -96,6 +95,7 @@ class ViewController: UIViewController {
     }
     
     func handlePlay() {
+        playButton.isUserInteractionEnabled = false
         var waitingUsers = [String:[String:Any]]()
         let ref = Database.database().reference().child("queue")
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -144,7 +144,6 @@ class ViewController: UIViewController {
                 number += 1
             }else {
                 print("Game room reference")
-
             }
         })
     }
@@ -172,13 +171,6 @@ class ViewController: UIViewController {
         })
     }
     
-    func checkIfUserIdLogin() {
-        if Auth.auth().currentUser?.uid == nil {
-            //User is not login 
-            logout()
-        }
-    }
-    
     func logout() {
         let loginView = LoginViewController()
         present(loginView, animated: true, completion: nil)
@@ -189,16 +181,18 @@ class ViewController: UIViewController {
         //Hide top bar
         self.navigationController?.isNavigationBarHidden = true
         
-        userUid = Auth.auth().currentUser?.uid
+        if let user = Auth.auth().currentUser?.uid {
+            userUid = user
+            print(userUid!)
+        }else {
+            logout()
+        }
         
         //Set up background image viewTy też płać mniej w Play! Przenieś numer!
         setUpBackgroundImageView()
     
         //Set up menu stack view and menu buttons
         setUpMenuButtons()
-    
-        //Check if user is login and if not logout him
-        checkIfUserIdLogin()
     }
 }
 

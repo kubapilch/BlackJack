@@ -10,8 +10,17 @@ import UIKit
 
 class Card: UIView{
     
-    var rank:Int?
-    var name:String?
+    var rank:Int? {
+        didSet{
+            frontImageView.image = UIImage(named: "\(rank!)")
+        }
+    }
+    var name:String? {
+        didSet{
+            retriveNameAndRank()
+        }
+    }
+    var isAce:Bool?
     var frontImageView = UIImageView()
     var backImageView = UIImageView()
     var isUpSideDown = false {
@@ -21,6 +30,36 @@ class Card: UIView{
                 backImageView.alpha = 1
             }
         }
+    }
+    
+    private func retriveNameAndRank() {
+        var num = 0
+        var num2 = 0
+        var halfNumber = ""
+        var now = false
+        let numbers = ["0","1","2","3","4","5","6","7","8","9"]
+        for lettre in (name?.characters)! {
+            if num == 0 && lettre == "0" && num2 == 0{
+                num += 1
+                now = true
+            }else if num == 1 && now && numbers.contains(String(lettre)) {
+                let foundNumber = Int(String(lettre))
+                num += 1
+                now = false
+                rank = foundNumber
+            }else if numbers.contains(String(lettre)) {
+                halfNumber = "\(halfNumber)\(lettre)"
+                if num2 == 1 {
+                    rank = Int(halfNumber)
+                }else {
+                    num2 += 1
+                }
+            }
+        }
+    }
+    
+    private func setImage() {
+        
     }
     
     private func laySubViews() {
@@ -55,11 +94,4 @@ class Card: UIView{
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setFrontImageView(name:String) {
-        frontImageView.image = UIImage(named:name)
-    }
-    
-    
-    
 }
