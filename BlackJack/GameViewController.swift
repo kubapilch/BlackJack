@@ -112,7 +112,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         but.setTitle("More", for: .normal)
         but.titleLabel?.textColor = UIColor.white
         but.isUserInteractionEnabled = true
-        //but.addTarget(self, action: #selector(test), for: .touchUpInside)
+        but.addTarget(self, action: #selector(handleMore), for: .touchUpInside)
         return but
     }()
 
@@ -123,7 +123,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         but.setTitle("Check", for: .normal)
         but.titleLabel?.textColor = UIColor.white
         but.isUserInteractionEnabled = true
-        //but.addTarget(self, action: #selector(test), for: .touchUpInside)
+        but.addTarget(self, action: #selector(handleCheck), for: .touchUpInside)
         return but
     }()
     
@@ -181,7 +181,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         setUpStackViews()
         
         //Set up cards imageViews
-        setUpCardsImageViews()
+        //setUpCardsImageViews()
         
         //Set up bottom bar
         layoutBottomBarView()

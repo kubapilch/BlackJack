@@ -32,6 +32,7 @@ class ViewController: UIViewController {
             userDef.synchronize()
             print("Opponent uid: \(opponentUid!)")
             present(gameView, animated: true) {
+                self.playButton.isUserInteractionEnabled = true
                 print("view presented")
             }
         }

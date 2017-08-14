@@ -13,6 +13,10 @@ import Firebase
 
 extension GameViewController {
     
+    func addCardToOnBoardPlayerStackView(card:Card) {
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.isStatusBarHidden = true
     }
@@ -172,7 +176,7 @@ extension GameViewController {
         playerCardsStackView.widthAnchor.constraint(equalTo: cardsStackView.widthAnchor).isActive = true
     }
     
-    func setUpCardsImageViews() {
+    /*func setUpCardsImageViews() {
         //Fill player cards stack view
         for _ in  0..<5 {
             let card = Card()
@@ -192,7 +196,7 @@ extension GameViewController {
             opponentCardsOnBoard.append(card)
             opponentCardsStackView.addArrangedSubview(card)
         }
-    }
+    }*/
     
     func setUpTimers() {
         //Set up player timer

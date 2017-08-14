@@ -20,14 +20,16 @@ class Card: UIView{
             retriveNameAndRank()
         }
     }
-    var isAce:Bool?
     var frontImageView = UIImageView()
     var backImageView = UIImageView()
-    var isUpSideDown = false {
+    var isUpSideDown:Bool? {
         didSet{
-            if isUpSideDown {
+            if isUpSideDown! {
                 frontImageView.alpha = 0
                 backImageView.alpha = 1
+            }else {
+                frontImageView.alpha = 1
+                backImageView.alpha = 0
             }
         }
     }
