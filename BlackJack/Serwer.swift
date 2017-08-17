@@ -30,6 +30,9 @@ extension GameViewController {
             self.playerStartCards[num].name = data
             print("Get player one card number \(num)")
             num += 1
+            if num == 1 {
+                self.startOpponentTimer()
+            }
         })
     }
     
@@ -40,6 +43,8 @@ extension GameViewController {
             if data == "true" {
                 self.moreButton.isUserInteractionEnabled = true
                 self.getDeck()
+                self.startUserTimer()
+                self.stopOpponentTimer()
             }
         })
     }
@@ -206,6 +211,7 @@ extension GameViewController {
             card.name = data
             self.opponentCardsOnBoard.append(card)
             self.opponentCardsStackView.addArrangedSubview(card)
+            self.opponentTimer.time = 15
         })
     }
     

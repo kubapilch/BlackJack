@@ -36,8 +36,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
     
     
     //Timers
-    let playerTimer = Timer()
-    let opponentTimer = Timer()
+    let playerTimer = TimerView()
+    let opponentTimer = TimerView()
+    var playerTimerReference: Timer?
+    var opponentTimerReference: Timer?
     
     
     //Players names variables

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class ViewController: UIViewController {
 
@@ -19,6 +20,7 @@ class ViewController: UIViewController {
     var roomReference:String? {
         didSet{
             print("Joining room with reference: \(roomReference!)")
+            dissmissLoadingView()
             let gameView = GameViewController()
             gameView.gameRoomReference = self.roomReference
             gameView.playerUid = self.userUid
@@ -68,6 +70,7 @@ class ViewController: UIViewController {
     let creditsButton: CustomButton = {
         var button = CustomButton()
         button.setText(text: "Credits")
+        button.color = UIColor.black
         return button
     }()
     
@@ -75,6 +78,7 @@ class ViewController: UIViewController {
         var button = CustomButton()
         button.setText(text: "Logout")
         button.addTarget(self, action: #selector(ViewController.handleLogout), for: .touchUpInside)
+        button.color = UIColor.black
         return button
     }()
     
@@ -82,10 +86,15 @@ class ViewController: UIViewController {
         var button = CustomButton()
         button.setText(text: "Play")
         button.addTarget(self, action: #selector(ViewController.handlePlay), for: .touchUpInside)
+        button.color = UIColor.black
         return button
     }()
 
     func handleLogout() {
+        guard logoutButton.titleLabel?.text! == "Cancel" else {
+            handleCancel()
+            return
+        }
         do{
             try Auth.auth().signOut()
             print("User sucesfully logout")
@@ -95,12 +104,32 @@ class ViewController: UIViewController {
         }
     }
     
+    fileprivate func dissmissLoadingView() {
+        SVProgressHUD.dismiss()
+        
+        resizeButton()
+        
+        logoutButton.color = UIColor.black
+        logoutButton.setText(text: "Logout")
+    }
+    
+    fileprivate func showLoadingView() {
+        SVProgressHUD.show(withStatus: "Looking for opponent..")
+        SVProgressHUD.setDefaultStyle(.dark)
+        
+        resizeButton()
+        
+        logoutButton.backgroundColor = UIColor.red
+        logoutButton.setTitle("Cancle", for: .normal)
+    }
+    
     func handlePlay() {
         playButton.isUserInteractionEnabled = false
         var waitingUsers = [String:[String:Any]]()
         let ref = Database.database().reference().child("queue")
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value!)
+            self.showLoadingView()
             let data = snapshot.value as! [String:Any]
             for i in data {
                 if i.key != "working" {
@@ -172,9 +201,26 @@ class ViewController: UIViewController {
         })
     }
     
+    fileprivate func handleCancel() {
+        let ref = Database.database().reference().child("queue").child(userUid!)
+        ref.removeValue()
+        ref.removeAllObservers()
+    
+        dissmissLoadingView()
+    
+        playButton.isUserInteractionEnabled = true
+    }
+    
     func logout() {
         let loginView = LoginViewController()
         present(loginView, animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = Auth.auth().currentUser?.uid {
+            userUid = user
+            print(userUid!)
+        }
     }
     
     override func viewDidLoad() {
@@ -193,7 +239,7 @@ class ViewController: UIViewController {
         setUpBackgroundImageView()
     
         //Set up menu stack view and menu buttons
-        setUpMenuButtons()
+        setUpMenuButtons(width: 10)
     }
 }
 

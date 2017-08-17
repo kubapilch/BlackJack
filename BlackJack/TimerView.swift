@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Timer: UIView {
+class TimerView: UIView {
     
     var counter = UILabel()
     var time:Int? {

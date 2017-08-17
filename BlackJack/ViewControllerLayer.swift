@@ -9,6 +9,25 @@
 import UIKit
 
 extension ViewController {
+    
+    func resizeButton() {
+        if logoutButton.titleLabel?.text == "Logout"{
+            makeItSmaller()
+        }else {
+            makeItBigger()
+        }
+    }
+    
+    fileprivate func makeItSmaller() {
+        buttonsStackView.removeFromSuperview()
+        setUpMenuButtons(width: 60)
+    }
+    
+    fileprivate func makeItBigger() {
+        buttonsStackView.removeFromSuperview()
+        setUpMenuButtons(width: 10)
+    }
+    
     func setUpBackgroundImageView() {
         self.view.addSubview(backgroundImageView)
         backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
@@ -17,26 +36,27 @@ extension ViewController {
         backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-    func setUpMenuButtons() {
+    func setUpMenuButtons(width:Int) {
         //Set up buttons stack view
         self.view.addSubview(buttonsStackView)
-        buttonsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         buttonsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        buttonsStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        buttonsStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        buttonsStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: CGFloat(width)).isActive = true
+        buttonsStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: CGFloat(-width)).isActive = true
+        buttonsStackView.heightAnchor.constraint(equalToConstant: 176).isActive = true
             
         //Set up play button
         buttonsStackView.addArrangedSubview(playButton)
-        //playButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         playButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        playButton.alpha = width == 10 ? 0.7 : 0
         
         //Set up credits button
         buttonsStackView.addArrangedSubview(creditsButton)
-        //creditsButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         creditsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    
+        creditsButton.alpha = width == 10 ? 0.7 : 0
+        
         //Set up logout button
         buttonsStackView.addArrangedSubview(logoutButton)
         logoutButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        logoutButton.alpha = 0.7
     }
 }

@@ -10,7 +10,7 @@
 		8C0E2B9A1F34FE1B001105BB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */; };
 		8C0E2B9C1F34FE34001105BB /* RegisterViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */; };
 		8C2DE3261F38CBEF00569B44 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DE3251F38CBEF00569B44 /* Arrays.swift */; };
-		8C2F85B01F320A4C0019DA84 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F85AF1F320A4C0019DA84 /* Timer.swift */; };
+		8C2F85B01F320A4C0019DA84 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F85AF1F320A4C0019DA84 /* TimerView.swift */; };
 		8C466AE41F37B1D1005E5F70 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C466AE31F37B1D1005E5F70 /* CustomButton.swift */; };
 		8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A9ACA1F33B874007D112B /* LoginViewController.swift */; };
 		8CAC02181F35D02C00642EB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */; };
@@ -36,7 +36,7 @@
 		8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerLayer.swift; sourceTree = "<group>"; };
 		8C2DE3251F38CBEF00569B44 /* Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
-		8C2F85AF1F320A4C0019DA84 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		8C2F85AF1F320A4C0019DA84 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8C466AE31F37B1D1005E5F70 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		8C4A9ACA1F33B874007D112B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				8CB697411F314478000A0462 /* Card.swift */,
-				8C2F85AF1F320A4C0019DA84 /* Timer.swift */,
+				8C2F85AF1F320A4C0019DA84 /* TimerView.swift */,
 				8C466AE31F37B1D1005E5F70 /* CustomButton.swift */,
 			);
 			name = Models;
@@ -314,7 +314,7 @@
 				8C0E2B9C1F34FE34001105BB /* RegisterViewControllerLayer.swift in Sources */,
 				8C0E2B9A1F34FE1B001105BB /* RegisterViewController.swift in Sources */,
 				8CB697421F314478000A0462 /* Card.swift in Sources */,
-				8C2F85B01F320A4C0019DA84 /* Timer.swift in Sources */,
+				8C2F85B01F320A4C0019DA84 /* TimerView.swift in Sources */,
 				8CD979551F30792000190CB2 /* GameViewController.swift in Sources */,
 				8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */,
 				8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */,

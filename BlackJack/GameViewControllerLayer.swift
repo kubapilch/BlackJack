@@ -12,11 +12,7 @@ import UIKit
 import Firebase
 
 extension GameViewController {
-    
-    func addCardToOnBoardPlayerStackView(card:Card) {
-        
-    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.isStatusBarHidden = true
     }
@@ -175,42 +171,22 @@ extension GameViewController {
         playerCardsStackView.heightAnchor.constraint(equalToConstant: 85).isActive = true
         playerCardsStackView.widthAnchor.constraint(equalTo: cardsStackView.widthAnchor).isActive = true
     }
-    
-    /*func setUpCardsImageViews() {
-        //Fill player cards stack view
-        for _ in  0..<5 {
-            let card = Card()
-            card.heightAnchor.constraint(equalToConstant: 76).isActive = true
-            card.widthAnchor.constraint(equalToConstant: 49).isActive = true
-            card.rank = 14
-            playerCardsOnBoard.append(card)
-            playerCardsStackView.addArrangedSubview(card)
-        }
-        //Fill opponent cards stack view
-        for _ in  0..<5 {
-            let card = Card()
-            card.heightAnchor.constraint(equalToConstant: 76).isActive = true
-            card.widthAnchor.constraint(equalToConstant: 49).isActive = true
-            card.rank = 14
-            card.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-            opponentCardsOnBoard.append(card)
-            opponentCardsStackView.addArrangedSubview(card)
-        }
-    }*/
-    
+  
     func setUpTimers() {
         //Set up player timer
         self.view.addSubview(playerTimer)
         playerTimer.translatesAutoresizingMaskIntoConstraints = false
         playerTimer.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
         playerTimer.bottomAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: -5).isActive = true
-        playerTimer.time = 10
+        playerTimer.time = 15
+        playerTimer.alpha = 0
         
         //Set up opponent player
         self.view.addSubview(opponentTimer)
         opponentTimer.translatesAutoresizingMaskIntoConstraints = false
         opponentTimer.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
         opponentTimer.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        opponentTimer.time = 8
+        opponentTimer.time = 15
+        opponentTimer.alpha = 0
     }
 }

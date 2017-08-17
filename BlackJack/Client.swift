@@ -37,6 +37,7 @@ extension GameViewController {
             card.name = data
             self.opponentCardsOnBoard.append(card)
             self.opponentCardsStackView.addArrangedSubview(card)
+            self.opponentTimer.time = 15
         })
     }
     
@@ -48,6 +49,7 @@ extension GameViewController {
         
         let opponentHandRef = ref?.child("playerOneStartingCards")
         opponentHandRef?.updateChildValues(["0":opponentStartCards[0].name!,"1":opponentStartCards[1].name!])
+        startUserTimer()
     }
     
     private func waitForWinner() {
@@ -55,16 +57,17 @@ extension GameViewController {
         winnerRef?.observe(.childAdded, with: { (snapshot) in
             let data = snapshot.value as! String
             print(data)
-            if data ==  "player one wins" {
+            if data ==  "playerTwo" {
                 self.userWins()
-            }else if data == "player two wins"{
+            }else if data == "playerOne"{
                 self.opponentWins()
-            }else {
+            }else if data == "draw" {
                 self.draw()
             }
             self.opponentStartCards[0].isUpSideDown = false
             self.opponentStartCards[1].isUpSideDown = false
             self.ref?.removeValue()
+            self.stopOpponentTimer()
             
             let when = DispatchTime.now() + 5
             DispatchQueue.main.asyncAfter(deadline: when) {

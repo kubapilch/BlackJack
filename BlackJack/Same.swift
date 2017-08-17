@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Foundation
 
 extension GameViewController {
     
@@ -17,6 +18,7 @@ extension GameViewController {
             let playerOneFinishedRef = ref?.child("playerOneFinished")
             playerOneFinishedRef?.updateChildValues(["0":"true"])
             whoWins(points: sumUpPoints())
+            stopUserTimer()
         }else {
             let deckRef = ref?.child("deck")
             var num = 0
@@ -26,6 +28,8 @@ extension GameViewController {
             }
             let playerTwoFinishedRef = ref?.child("playerTwoFinished")
             playerTwoFinishedRef?.updateChildValues(["0":"true"])
+            startOpponentTimer()
+            stopUserTimer()
         }
     }
     
@@ -70,12 +74,51 @@ extension GameViewController {
         card.widthAnchor.constraint(equalToConstant: 49).isActive = true
         cards.removeFirst()
         playerCardsStackView.addArrangedSubview(card)
+        playerTimer.time = 15
         if side == .server {
             let playerOneOnBoardCardsRef = ref?.child("playerOneOnTableCards")
             playerOneOnBoardCardsRef?.updateChildValues(["\(playerCardsOnBoard.count)":card.name!])
         }else {
             let playerTwoOnBoardCardsRef = ref?.child("playerTwoOnTableCards")
             playerTwoOnBoardCardsRef?.updateChildValues(["\(playerCardsOnBoard.count)":card.name!])
+        }
+    }
+    
+    func stopUserTimer() {
+        playerTimer.alpha = 0
+        playerTimerReference?.invalidate()
+        playerTimerReference = nil
+    }
+    
+    func stopOpponentTimer() {
+        opponentTimer.alpha = 0
+        opponentTimerReference?.invalidate()
+        opponentTimerReference = nil
+    }
+    
+    func startUserTimer() {
+        playerTimerReference = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateUserTimer), userInfo: nil, repeats: true)
+        playerTimer.alpha = 1
+    }
+    
+    func startOpponentTimer() {
+        opponentTimerReference = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateOpponentTimer), userInfo: nil, repeats: true)
+        opponentTimer.alpha = 1
+    }
+    
+    func updateUserTimer() {
+        if playerTimer.time == 0 {
+            handleCheck()
+            return
+        }
+        playerTimer.time = playerTimer.time! - 1
+    }
+    
+    func updateOpponentTimer() {
+        if opponentTimer.time != 0 {
+            opponentTimer.time = opponentTimer.time! - 1
+        }else {
+            stopOpponentTimer()
         }
     }
     

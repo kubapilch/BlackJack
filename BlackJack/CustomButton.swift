@@ -10,10 +10,14 @@ import UIKit
 
 class CustomButton: UIButton {
 
+    var color: UIColor? {
+        didSet{
+            self.backgroundColor = color!
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = UIColor.black
-        self.alpha = 0.6
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
