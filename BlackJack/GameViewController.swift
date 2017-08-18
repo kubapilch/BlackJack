@@ -10,8 +10,7 @@ import UIKit
 import CoreGraphics
 import Firebase
 
-class GameViewController: UIViewController, UIGestureRecognizerDelegate{
-    
+class GameViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     // Enumeration variables
     enum type {
         case server
@@ -19,6 +18,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     var side: type?
     
+    
+    //CollectionViews
+    var playerCollectionView: UICollectionView!
+    var opponentCollectionView: MyCollectionView!
     
     //All cards arrays
     var playerCardsOnBoard:[Card] = []
@@ -139,37 +142,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         return imageView
     }()
     
-    
-    //On table stack views
-    let playerCardsStackView:UIStackView = {
-        var stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 1
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.distribution = .equalSpacing
-        return stack
-    }()
-    
-    let opponentCardsStackView: UIStackView = {
-        var stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 1
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.distribution = .equalSpacing
-        return stack
-    }()
-    
-    let cardsStackView: UIStackView = {
-        var stack = UIStackView()
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.distribution = .equalSpacing
-        stack.spacing = 10
-        return stack
-    }()
-    
-    
-    
     //Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,12 +150,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         
         //Set up background view
         setUpBackgroundView()
-        
-        //Set up stuckviews
-        setUpStackViews()
-        
-        //Set up cards imageViews
-        //setUpCardsImageViews()
         
         //Set up bottom bar
         layoutBottomBarView()
@@ -198,5 +164,23 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate{
         setLabels()
         
         setType()
+    
+        setupPlayerCollectionView()
+    
+        setupOpponentCollectionView()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return playerCardsOnBoard.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! MyCollectionViewCell
+                
+        let imageName = playerCardsOnBoard[indexPath.item].rank!
+        cell.image = UIImage(named: String(imageName))!
+        
+        return cell
+    }
+    
 } 

@@ -13,6 +13,9 @@
 		8C2F85B01F320A4C0019DA84 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F85AF1F320A4C0019DA84 /* TimerView.swift */; };
 		8C466AE41F37B1D1005E5F70 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C466AE31F37B1D1005E5F70 /* CustomButton.swift */; };
 		8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A9ACA1F33B874007D112B /* LoginViewController.swift */; };
+		8C7C39741F4607B80099F92E /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C39731F4607B80099F92E /* MyCollectionView.swift */; };
+		8C85D8AB1F46271D00222444 /* CollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85D8AA1F46271D00222444 /* CollectionViewExtension.swift */; };
+		8C85D8AD1F46674300222444 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85D8AC1F46674300222444 /* MyCollectionViewCell.swift */; };
 		8CAC02181F35D02C00642EB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */; };
 		8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */; };
 		8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CC1F2FDD4800CA56C8 /* ViewController.swift */; };
@@ -39,6 +42,9 @@
 		8C2F85AF1F320A4C0019DA84 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8C466AE31F37B1D1005E5F70 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		8C4A9ACA1F33B874007D112B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8C7C39731F4607B80099F92E /* MyCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
+		8C85D8AA1F46271D00222444 /* CollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewExtension.swift; sourceTree = "<group>"; };
+		8C85D8AC1F46674300222444 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8CAE54C71F2FDD4800CA56C8 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 				8CB35A9E1F30BE980048C3A8 /* GameViewControllerLayer.swift */,
 				8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */,
 				8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */,
+				8C85D8AA1F46271D00222444 /* CollectionViewExtension.swift */,
 			);
 			name = layers;
 			sourceTree = "<group>";
@@ -135,6 +142,8 @@
 				8CB697411F314478000A0462 /* Card.swift */,
 				8C2F85AF1F320A4C0019DA84 /* TimerView.swift */,
 				8C466AE31F37B1D1005E5F70 /* CustomButton.swift */,
+				8C7C39731F4607B80099F92E /* MyCollectionView.swift */,
+				8C85D8AC1F46674300222444 /* MyCollectionViewCell.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -320,10 +329,13 @@
 				8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */,
 				8CF06FA01F3F197700E8F933 /* Client.swift in Sources */,
 				8C466AE41F37B1D1005E5F70 /* CustomButton.swift in Sources */,
+				8C85D8AB1F46271D00222444 /* CollectionViewExtension.swift in Sources */,
 				8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */,
 				8CF06FA21F3F1B4F00E8F933 /* Same.swift in Sources */,
 				8CDC5A161F33C27100164C83 /* LoginViewControllerLayer.swift in Sources */,
 				8C2DE3261F38CBEF00569B44 /* Arrays.swift in Sources */,
+				8C85D8AD1F46674300222444 /* MyCollectionViewCell.swift in Sources */,
+				8C7C39741F4607B80099F92E /* MyCollectionView.swift in Sources */,
 				8CAE54E11F2FE61600CA56C8 /* ViewControllerLayer.swift in Sources */,
 				8CF06F9E1F3F195C00E8F933 /* Serwer.swift in Sources */,
 			);

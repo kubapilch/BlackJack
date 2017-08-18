@@ -10,6 +10,14 @@ import UIKit
 
 class Card: UIView{
     
+    let borderView: UIView = {
+        var view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 76).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 54).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     var rank:Int? {
         didSet{
             frontImageView.image = UIImage(named: "\(rank!)")
@@ -60,10 +68,6 @@ class Card: UIView{
         }
     }
     
-    private func setImage() {
-        
-    }
-    
     private func laySubViews() {
         //Set up front image view
         self.addSubview(frontImageView)
@@ -86,9 +90,21 @@ class Card: UIView{
         backImageView.image = UIImage(named: "back")
     }
     
+    fileprivate func setupBorderView() {
+        self.addSubview(borderView)
+        
+        borderView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        borderView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    }
+    
+    func setup(color:UIColor) {
+        borderView.backgroundColor = color
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
+        setupBorderView()
         laySubViews()
     }
     

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+
 extension GameViewController {
     
     private func waitForPlayerTwoTakeStartingCards() {
@@ -32,6 +33,7 @@ extension GameViewController {
             num += 1
             if num == 1 {
                 self.startOpponentTimer()
+                self.removeObserverFromStartingCards()
             }
         })
     }
@@ -48,6 +50,12 @@ extension GameViewController {
             }
         })
     }
+    
+    fileprivate func removeObserverFromStartingCards() {
+        ref?.child("playerOneStartingCards").removeAllObservers()
+        ref?.child("playerTwoStartingCards").removeAllObservers()
+    }
+
     
     private func sumUpPlayerOnePoints() -> Int{
         var playerOnePoints = 0
@@ -194,7 +202,9 @@ extension GameViewController {
         }
         opponentStartCards[0].isUpSideDown = false
         opponentStartCards[1].isUpSideDown = false
-    
+        
+        ref?.removeAllObservers()
+        
         let when = DispatchTime.now() + 5
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.dismiss(animated: true, completion: nil)
@@ -210,7 +220,7 @@ extension GameViewController {
             card.widthAnchor.constraint(equalToConstant: 49).isActive = true
             card.name = data
             self.opponentCardsOnBoard.append(card)
-            self.opponentCardsStackView.addArrangedSubview(card)
+            self.opponentCollectionView.addCell(image:UIImage(named: String(card.rank!))!)
             self.opponentTimer.time = 15
         })
     }

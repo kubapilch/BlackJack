@@ -50,7 +50,7 @@ extension GameViewController {
         //Set opponnt card view
         setOpponentStartCards()
     }
-    
+     
     private func addOpponentStartCardsToOpponentCardView() {
         for i in 0...1 {
             let card = Card()
@@ -152,26 +152,6 @@ extension GameViewController {
         opponentLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    func setUpStackViews() {
-        //Set up main cards stack view
-        self.view.addSubview(cardsStackView)
-        cardsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cardsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        cardsStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        cardsStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        cardsStackView.heightAnchor.constraint(equalToConstant: 180).isActive = true
-        
-        //Set up opponent stack view
-        cardsStackView.addArrangedSubview(opponentCardsStackView)
-        opponentCardsStackView.heightAnchor.constraint(equalToConstant: 85).isActive = true
-        opponentCardsStackView.widthAnchor.constraint(equalTo: cardsStackView.widthAnchor).isActive = true
-        
-        //Set up player stack view
-        cardsStackView.addArrangedSubview(playerCardsStackView)
-        playerCardsStackView.heightAnchor.constraint(equalToConstant: 85).isActive = true
-        playerCardsStackView.widthAnchor.constraint(equalTo: cardsStackView.widthAnchor).isActive = true
-    }
-  
     func setUpTimers() {
         //Set up player timer
         self.view.addSubview(playerTimer)

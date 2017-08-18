@@ -9,11 +9,55 @@
 import UIKit
 import Firebase
 import Foundation
+import SVProgressHUD
 
 extension GameViewController {
+   
+    func showThatPlayerWin() {
+        SVProgressHUD.showSuccess(withStatus: "You Won!")
+        SVProgressHUD.setBackgroundColor(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
+        SVProgressHUD.setForegroundColor(UIColor.green)
+        SVProgressHUD.setDefaultStyle(.custom)
+    
+        for i in playerStartCards {
+            i.setup(color: .green)
+        }
+        for i in opponentStartCards {
+            i.setup(color: .red)
+        }
+    }
+    
+    func showThatPlayerLose() {
+        SVProgressHUD.showError(withStatus: "You Lose!")
+        SVProgressHUD.setBackgroundColor(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
+        SVProgressHUD.setForegroundColor(UIColor.red)
+        SVProgressHUD.setDefaultStyle(.custom)
+    
+        for i in playerStartCards {
+            i.setup(color: .red)
+        }
+        for i in opponentStartCards {
+            i.setup(color: .green)
+        }
+    }
+    
+    func showThatDraw() {
+        SVProgressHUD.showInfo(withStatus: "Draw!")
+        SVProgressHUD.setBackgroundColor(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
+        SVProgressHUD.setForegroundColor(UIColor.black)
+        SVProgressHUD.setDefaultStyle(.custom)
+    
+        for i in playerStartCards {
+            i.setup(color: .yellow)
+        }
+        for i in opponentStartCards {
+            i.setup(color: .yellow)
+        }
+    }
     
     func handleCheck() {
         moreButton.isUserInteractionEnabled = false
+        checkButton.isUserInteractionEnabled = false
         if side == .server {
             let playerOneFinishedRef = ref?.child("playerOneFinished")
             playerOneFinishedRef?.updateChildValues(["0":"true"])
@@ -34,36 +78,15 @@ extension GameViewController {
     }
     
     func draw() {
-        for i in playerStartCards {
-            i.layer.borderColor = UIColor.yellow.cgColor
-            i.layer.borderWidth = 5
-        }
-        for i in opponentStartCards {
-            i.layer.borderColor = UIColor.yellow.cgColor
-            i.layer.borderWidth = 5
-        }
+        showThatDraw()
     }
     
     func userWins() {
-        for i in playerStartCards {
-            i.layer.borderColor = UIColor.green.cgColor
-            i.layer.borderWidth = 5
-        }
-        for i in opponentStartCards {
-            i.layer.borderColor = UIColor.red.cgColor
-            i.layer.borderWidth = 5
-        }
+        showThatPlayerWin()
     }
     
     func opponentWins() {
-        for i in opponentStartCards {
-            i.layer.borderColor = UIColor.green.cgColor
-            i.layer.borderWidth = 5
-        }
-        for i in playerStartCards {
-            i.layer.borderColor = UIColor.red.cgColor
-            i.layer.borderWidth = 5
-        }
+        showThatPlayerLose()
     }
     
     func handleMore() {
@@ -73,8 +96,8 @@ extension GameViewController {
         card.heightAnchor.constraint(equalToConstant: 76).isActive = true
         card.widthAnchor.constraint(equalToConstant: 49).isActive = true
         cards.removeFirst()
-        playerCardsStackView.addArrangedSubview(card)
         playerTimer.time = 15
+        playerCollectionView.reloadData()
         if side == .server {
             let playerOneOnBoardCardsRef = ref?.child("playerOneOnTableCards")
             playerOneOnBoardCardsRef?.updateChildValues(["\(playerCardsOnBoard.count)":card.name!])
@@ -106,6 +129,7 @@ extension GameViewController {
         opponentTimer.alpha = 1
     }
     
+        
     func updateUserTimer() {
         if playerTimer.time == 0 {
             handleCheck()

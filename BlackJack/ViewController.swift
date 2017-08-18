@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     }()
 
     func handleLogout() {
-        guard logoutButton.titleLabel?.text! == "Cancel" else {
+        guard logoutButton.titleLabel?.text! == "Logout" else {
             handleCancel()
             return
         }
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
         
         resizeButton()
         
-        logoutButton.color = UIColor.black
+        logoutButton.backgroundColor = UIColor(white: 0, alpha: 0.7)
         logoutButton.setText(text: "Logout")
     }
     
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
         
         resizeButton()
         
-        logoutButton.backgroundColor = UIColor.red
+        logoutButton.backgroundColor = UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 0.7)
         logoutButton.setTitle("Cancle", for: .normal)
     }
     
@@ -174,10 +174,11 @@ class ViewController: UIViewController {
                 number += 1
             }else {
                 print("Game room reference")
+                refQueue.removeAllObservers()
             }
         })
     }
-    
+ 
     func joinToQueue(withUid:String) {
         print("joining to queue with uid: \(withUid)")
         opponentUid = withUid
@@ -196,6 +197,7 @@ class ViewController: UIViewController {
             }else if number == 2 {
                 print("Game room reference created by opponent")
                 self.roomReference = (snapshot.value as! String)
+                ref.removeAllObservers()
                 ref.removeValue()
             }
         })

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 extension GameViewController {
     
@@ -36,7 +37,7 @@ extension GameViewController {
             card.widthAnchor.constraint(equalToConstant: 49).isActive = true
             card.name = data
             self.opponentCardsOnBoard.append(card)
-            self.opponentCardsStackView.addArrangedSubview(card)
+            self.opponentCollectionView.addCell(image:UIImage(named: String(card.rank!))!)
             self.opponentTimer.time = 15
         })
     }
@@ -66,7 +67,10 @@ extension GameViewController {
             }
             self.opponentStartCards[0].isUpSideDown = false
             self.opponentStartCards[1].isUpSideDown = false
+            
+            self.ref?.removeAllObservers()
             self.ref?.removeValue()
+            
             self.stopOpponentTimer()
             
             let when = DispatchTime.now() + 5
