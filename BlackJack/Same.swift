@@ -13,7 +13,40 @@ import SVProgressHUD
 
 extension GameViewController {
    
-    func showThatPlayerWin() {
+    func updateUserInfo(didWon:Bool,didHaveMax:Bool) {
+        let userRef = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+        
+        userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            var data = snapshot.value as! [String:String]
+        
+            let handsPlayed = Int(data["HandsPlayed"]!)! + 1
+            data["HandsPlayed"] = String(handsPlayed)
+            
+            if didWon {
+                
+                let handsWon = Int(data["HandsWon"]!)! + 1
+                data["HandsWon"] = String(handsWon)
+                
+                let currentStrick = Int(data["CurrentWonStricke"]!)! + 1
+                data["CurrentWonStricke"] = String(currentStrick)
+                
+                if Int(data["MaxWonStricke"]!)! < currentStrick {
+                    data["MaxWonStricke"] = String(currentStrick)
+                }
+                
+                if didHaveMax {
+                    let maxPoints = Int(data["MaxPointsTimes"]!)! + 1
+                    data["MaxPointsTimes"] = String(maxPoints)
+                }
+            }else {
+                 data["CurrentWonStricke"] = "0"
+            }
+            
+            userRef.updateChildValues(data)
+        })
+    }
+    
+    func showThatPlayerWin(didHaveMax:Bool) {
         SVProgressHUD.showSuccess(withStatus: "You Won!")
         SVProgressHUD.setBackgroundColor(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
         SVProgressHUD.setForegroundColor(UIColor.green)
@@ -25,9 +58,11 @@ extension GameViewController {
         for i in opponentStartCards {
             i.setup(color: .red)
         }
+    
+        updateUserInfo(didWon: true, didHaveMax: didHaveMax)
     }
     
-    func showThatPlayerLose() {
+    func showThatPlayerLose(didHaveMax:Bool) {
         SVProgressHUD.showError(withStatus: "You Lose!")
         SVProgressHUD.setBackgroundColor(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
         SVProgressHUD.setForegroundColor(UIColor.red)
@@ -39,9 +74,11 @@ extension GameViewController {
         for i in opponentStartCards {
             i.setup(color: .green)
         }
+    
+        updateUserInfo(didWon: false, didHaveMax: didHaveMax)
     }
     
-    func showThatDraw() {
+    func showThatDraw(didHaveMax:Bool) {
         SVProgressHUD.showInfo(withStatus: "Draw!")
         SVProgressHUD.setBackgroundColor(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
         SVProgressHUD.setForegroundColor(UIColor.black)
@@ -53,6 +90,8 @@ extension GameViewController {
         for i in opponentStartCards {
             i.setup(color: .yellow)
         }
+    
+        updateUserInfo(didWon: false, didHaveMax: didHaveMax)
     }
     
     func handleCheck() {
@@ -76,19 +115,7 @@ extension GameViewController {
             stopUserTimer()
         }
     }
-    
-    func draw() {
-        showThatDraw()
-    }
-    
-    func userWins() {
-        showThatPlayerWin()
-    }
-    
-    func opponentWins() {
-        showThatPlayerLose()
-    }
-    
+
     func handleMore() {
         guard playerCardsOnBoard.count < 10 else{return}
         playerCardsOnBoard.append(cards.first!)

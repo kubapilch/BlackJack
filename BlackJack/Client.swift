@@ -55,29 +55,42 @@ extension GameViewController {
     
     private func waitForWinner() {
         let winnerRef = ref?.child("winner")
+        var num = 0
+        
         winnerRef?.observe(.childAdded, with: { (snapshot) in
-            let data = snapshot.value as! String
-            print(data)
-            if data ==  "playerTwo" {
-                self.userWins()
-            }else if data == "playerOne"{
-                self.opponentWins()
-            }else if data == "draw" {
-                self.draw()
-            }
-            self.opponentStartCards[0].isUpSideDown = false
-            self.opponentStartCards[1].isUpSideDown = false
             
-            self.ref?.removeAllObservers()
-            self.ref?.removeValue()
-            
-            self.stopOpponentTimer()
-            
-            let when = DispatchTime.now() + 5
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                self.dismiss(animated: true, completion: nil)
+            if num == 0 {
+                let data = snapshot.value as! String
+                self.winner = data
+                num += 1
+            }else {
+                let data = snapshot.value as! Bool
+                self.ref?.child("winner").removeAllObservers()
+                self.showResults(data: self.winner, didHaveMax: data)
             }
         })
+    }
+    
+    fileprivate func showResults(data:String?,didHaveMax:Bool) {
+        if data ==  "playerTwo" {
+            self.showThatPlayerWin(didHaveMax: didHaveMax)
+        }else if data == "playerOne"{
+            self.showThatPlayerLose(didHaveMax: didHaveMax)
+        }else if data == "draw" {
+            self.showThatDraw(didHaveMax: didHaveMax)
+        }
+        self.opponentStartCards[0].isUpSideDown = false
+        self.opponentStartCards[1].isUpSideDown = false
+        
+        self.ref?.removeAllObservers()
+        self.ref?.removeValue()
+        
+        self.stopOpponentTimer()
+        
+        let when = DispatchTime.now() + 5
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func waitForCards() {

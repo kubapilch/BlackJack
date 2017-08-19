@@ -98,24 +98,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         present(registerView, animated: true, completion: nil)
     }
     
-    func checktextFields() {
-        guard let password = passwordField.text, let mail = mailField.text else {return}
-        Auth.auth().signIn(withEmail: mail, password: password) { (user, error) in
-            if error != nil {
-                //User ist login
-                self.mailLine.backgroundColor = UIColor.red
-                self.passwordLine.backgroundColor = UIColor.red
-                return
-            }
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpBackImageView()

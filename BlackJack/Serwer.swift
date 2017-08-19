@@ -172,34 +172,42 @@ extension GameViewController {
     
     func whoWins(points: [Int]) {
         print("player one ponts: \(points.first!), player two points: \(points.last!)")
+        
+        let haveMaxOne = points.first == 21 ? true : false
+        let haveMaxTwo = points.last == 21 ? true : false
+        
         let winnerRef = ref?.child("winner")
+        
         if points.first! < 22 && points.last! < 22 && points.first! != points.last!{
             if points.first! > points.last! {
                 print("player one wins")
-                userWins()
+                showThatPlayerWin(didHaveMax: haveMaxOne)
                 winnerRef?.setValue(["0":"playerOne"])
             }else if points.first! < points.last! {
                 print("player two wins")
-                opponentWins()
+                showThatPlayerLose(didHaveMax: haveMaxOne)
                 winnerRef?.setValue(["0":"playerTwo"])
             }else {
                 print("remis")
-                draw()
+                showThatDraw(didHaveMax: haveMaxOne)
                 winnerRef?.setValue(["0":"draw"])
             }
         }else if points.first! < 22 && points.last! > 21 {
             print("player one wins")
-            userWins()
+            showThatPlayerWin(didHaveMax: haveMaxOne)
             winnerRef?.setValue(["0":"playerOne"])
         }else if points.first! > 21 && points.last! < 22 {
             print("player two wins")
-            opponentWins()
+            showThatPlayerLose(didHaveMax: haveMaxOne)
             winnerRef?.setValue(["0":"playerTwo"])
         }else {
             print("remis")
-            draw()
+            showThatDraw(didHaveMax: haveMaxOne)
             winnerRef?.setValue(["0":"draw"])
         }
+        
+        winnerRef?.updateChildValues(["1":haveMaxTwo])
+        
         opponentStartCards[0].isUpSideDown = false
         opponentStartCards[1].isUpSideDown = false
         

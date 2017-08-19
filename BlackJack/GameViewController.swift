@@ -18,6 +18,8 @@ class GameViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     }
     var side: type?
     
+    //Clients variables
+    var winner: String?
     
     //CollectionViews
     var playerCollectionView: UICollectionView!

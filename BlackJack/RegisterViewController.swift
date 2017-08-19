@@ -133,44 +133,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    
     func goBack() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func checkTextFields() {
-        guard let name = nameField.text, let mail = mailField.text, let password = passwordField.text, let confirmPassword = passwordFieldConfirm.text else {return}
-        if password != confirmPassword {
-            passwordLine.backgroundColor = UIColor.red
-            confirmPasswordLine.backgroundColor = UIColor.red
-            return
-        }
-        Auth.auth().createUser(withEmail: mail, password: password) { (user, error) in
-            if error != nil {
-                print("Problem with registering the user")
-                return
-            }
-            print("User sucesfully registered")
-            guard let userId = user?.uid else {return}
-            let ref = Database.database().reference().child("users").child(userId)
-            ref.setValue(["Name":name,"Mail":mail])
-            self.loginUser()
-        }
-        
-    }
-    
-    func loginUser() {
-        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpBackImageView()
         
         setUpBackView()
@@ -180,15 +149,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         addRegisterButton()
     
         addBackButton()
-    
+        
+        //Set delegates
         self.nameField.delegate = self
         self.mailField.delegate = self
         self.passwordField.delegate = self
         self.passwordFieldConfirm.delegate = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

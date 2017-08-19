@@ -10,6 +10,11 @@ import UIKit
 
 extension LoginViewController {
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     func setUpBackImageView() {
         self.view.addSubview(backImage)
         backImage.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true

@@ -47,19 +47,16 @@ extension ViewController {
         //Set up play button
         buttonsStackView.addArrangedSubview(playButton)
         playButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        //playButton.alpha = width == 10 ? 0.7 : 0
         playButton.backgroundColor = UIColor(white: 0, alpha: width == 10 ? 0.7 : 0)
         
         //Set up credits button
         buttonsStackView.addArrangedSubview(creditsButton)
         creditsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        //creditsButton.alpha = width == 10 ? 0.7 : 0
         creditsButton.backgroundColor = UIColor(white: 0, alpha: width == 10 ? 0.7 : 0)
         
         //Set up logout button
         buttonsStackView.addArrangedSubview(logoutButton)
         logoutButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        //logoutButton.alpha = 0.7
         logoutButton.backgroundColor = UIColor(white: 0, alpha: 0.7)
     }
 }
