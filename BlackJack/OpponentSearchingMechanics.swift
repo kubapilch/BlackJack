@@ -17,8 +17,8 @@ extension ViewController {
         
         resizeButton()
     
-        logoutButton.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        logoutButton.setText(text: "Logout")
+        howToButton.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        howToButton.setText(text: "How to play")
     }
     
     fileprivate func showLoadingView() {
@@ -27,8 +27,8 @@ extension ViewController {
         
         resizeButton()
         
-        logoutButton.backgroundColor = UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 0.7)
-        logoutButton.setTitle("Cancle", for: .normal)
+        howToButton.backgroundColor = UIColor(red: 255/255, green: 51/255, blue: 51/255, alpha: 0.7)
+        howToButton.setTitle("Cancle", for: .normal)
     }
 
     func prepareForGame() {

@@ -11,7 +11,11 @@ import Firebase
 import SVProgressHUD
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    
+    //Constraints
+    var topConstraint:NSLayoutConstraint?
+    var showed:Bool?
+    
     //Side type and variable
     enum type {
         case server
@@ -36,7 +40,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     //User Info
-    let userInfoView: UIView = {
+    lazy var userInfoView: UIView = {
         var customView = UIView()
         customView.backgroundColor = UIColor(white: 1, alpha: 0.5)
         customView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,8 +112,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     let miniUserNameLabel: UILabel = {
         var label = UILabel()
         label.text = "Kuba Pilch"
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
     
@@ -117,18 +122,20 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         var but = UIView()
         but.backgroundColor = UIColor.black
         but.translatesAutoresizingMaskIntoConstraints = false
-        but.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        but.heightAnchor.constraint(equalToConstant: 35).isActive = true
         but.widthAnchor.constraint(equalToConstant: 275).isActive = true
         but.layer.cornerRadius = 10
         but.clipsToBounds = true
-        let arrow = UIImageView()
-        arrow.translatesAutoresizingMaskIntoConstraints = false
-        arrow.heightAnchor.constraint(equalToConstant: 8).isActive = true
-        arrow.widthAnchor.constraint(equalToConstant: 11).isActive = true
-        but.addSubview(arrow)
-        arrow.rightAnchor.constraint(equalTo: but.rightAnchor, constant: 10).isActive = true
-        arrow.centerYAnchor.constraint(equalTo: but.centerYAnchor).isActive = true
         return but
+    }()
+    
+    let arrow: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 8).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 11).isActive = true
+        imageView.image = UIImage.init(named: "pointer")
+        return imageView
     }()
     
     let miniUserImage: UIImageView = {
@@ -150,6 +157,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         customView.heightAnchor.constraint(equalToConstant: 52).isActive = true
         customView.translatesAutoresizingMaskIntoConstraints = false
         return customView
+    }()
+    
+    let creditsButton: UIButton = {
+        var but = UIButton()
+        but.backgroundColor = UIColor(white: 1, alpha: 0.6)
+        but.translatesAutoresizingMaskIntoConstraints = false
+        but.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        but.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        but.layer.cornerRadius = 17.5
+        but.clipsToBounds = true
+        but.layer.borderWidth = 0.5
+        but.layer.borderColor = UIColor.black.cgColor
+        but.setTitle("i", for: .normal)
+        but.setTitleColor(.black, for: .normal)
+        but.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        return but
     }()
     
     let userImage: UIImageView = {
@@ -184,11 +207,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return label
     }()
     
-    let logoutButton2: UIButton = {
+    let logoutButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.4)
         button.titleLabel?.textColor = UIColor.black
+        button.addTarget(self, action: #selector(ViewController.handleLogout), for: .touchUpInside)
         button.setTitle("Logout", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         button.heightAnchor.constraint(equalToConstant: 22).isActive = true
@@ -253,18 +277,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return stack
     }()
     
-    let creditsButton: CustomButton = {
+    let bluetoothButton: CustomButton = {
         var button = CustomButton()
-        button.setText(text: "Credits")
+        button.setText(text: "Bluetooth")
         button.color = UIColor.black
         return button
     }()
     
-    let logoutButton: CustomButton = {
+    let howToButton: CustomButton = {
         var button = CustomButton()
-        button.setText(text: "Logout")
-        button.addTarget(self, action: #selector(ViewController.handleLogout), for: .touchUpInside)
+        button.setText(text: "How to play")
         button.color = UIColor.black
+        button.addTarget(self, action: #selector(handleHowToOrCancle), for: .touchUpInside)
         return button
     }()
     
@@ -288,7 +312,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         //Set up menu stack view and menu buttons
         setUpMenuButtons(width: 10)
         
-        //setupUserInfoContainerView()
+        setupUserInfoContainerView()
         sertupTopBarView()
         
         if let user = Auth.auth().currentUser?.uid {

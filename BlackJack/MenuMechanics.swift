@@ -12,16 +12,20 @@ import Firebase
 extension ViewController {
     //Functions
     func handleLogout() {
-        guard logoutButton.titleLabel?.text! == "Logout" else {
-            handleCancel()
-            return
-        }
         do{
             try Auth.auth().signOut()
             print("User sucesfully logout")
             logout()
         }catch let error as NSError{
             print("Cant logout the user \(error)")
+        }
+    }
+    
+    func handleHowToOrCancle() {
+        if howToButton.titleLabel?.text == "How to play" {
+            print("How to view")
+        }else {
+            handleCancel()
         }
     }
     

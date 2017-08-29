@@ -11,7 +11,7 @@ import UIKit
 extension ViewController {
     
     func resizeButton() {
-        if logoutButton.titleLabel?.text == "Logout"{
+        if howToButton.titleLabel?.text == "How to play"{
             makeItSmaller()
         }else {
             makeItBigger()
@@ -27,26 +27,26 @@ extension ViewController {
         buttonsStackView.removeFromSuperview()
         setUpMenuButtons(width: 10)
     }
-    
-    func test(gestureRecognizer: UITapGestureRecognizer) {
-        print("test")
-    }
-    
+   
     func sertupTopBarView() {
         self.view.addSubview(topBarView)
-        topBarView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 2).isActive = true
+        topBarView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 17).isActive = true
         topBarView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
         topBarView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
     
         setupUserInfoShowButton()
+        setupCreditsButton()
     }
     
     func setupUserInfoContainerView() {
         self.view.addSubview(userInfoView)
         userInfoView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -54).isActive = true
         userInfoView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        userInfoView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-    
+        topConstraint = NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: userInfoView, attribute: .top, multiplier: 1, constant: 200)
+        self.view.addConstraint(topConstraint!)
+        
+        self.view.layoutIfNeeded()
+        
         setupUserPersonalInfoContainerView()
         setupLineOne()
         setupLabelsView()
@@ -54,19 +54,68 @@ extension ViewController {
         setupUserInfoButtons()
     }
     
+    func hideUserInfoView() {
+        
+        guard showed == true else{return}
+        
+        showed = false
+        
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
+            
+            self.topConstraint?.constant = 200
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
+        
+        topBarView.alpha = 1
+        
+    }
+    
+    func showUserInfoView() {
+        
+        guard showed == false || showed == nil else{return}
+        
+        showed = true
+        
+        topBarView.alpha = 0
+        
+        self.view.bringSubview(toFront: userInfoView)
+        
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
+            
+            self.topConstraint?.constant = 0
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
+    }
+    
+    
     fileprivate func setupUserInfoShowButton() {
-        topBarView.addSubview(miniUserImage)
-        miniUserImage.leftAnchor.constraint(equalTo: topBarView.leftAnchor).isActive = true
-        miniUserImage.topAnchor.constraint(equalTo: topBarView.topAnchor).isActive = true
-    
         topBarView.addSubview(showingUserInfoButton)
-        showingUserInfoButton.leftAnchor.constraint(equalTo: miniUserImage.rightAnchor, constant: -5).isActive = true
-        showingUserInfoButton.centerYAnchor.constraint(equalTo: miniUserImage.centerYAnchor).isActive = true
+        showingUserInfoButton.leftAnchor.constraint(equalTo: topBarView.leftAnchor, constant: 40).isActive = true
+        showingUserInfoButton.centerYAnchor.constraint(equalTo: topBarView.centerYAnchor).isActive = true
+        showingUserInfoButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        showingUserInfoButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showUserInfoView)))
+        
+        
+        topBarView.addSubview(miniUserImage)
+        miniUserImage.topAnchor.constraint(equalTo: topBarView.topAnchor).isActive = true
+        miniUserImage.leftAnchor.constraint(equalTo: self.topBarView.leftAnchor, constant: 0).isActive = true
+        miniUserImage.widthAnchor.constraint(equalToConstant: 52).isActive = true
     
-        topBarView.addSubview(miniUserNameLabel)
-        miniUserNameLabel.leftAnchor.constraint(equalTo: miniUserImage.rightAnchor, constant: 10).isActive = true
-        miniUserImage.centerYAnchor.constraint(equalTo: showingUserInfoButton.centerYAnchor).isActive = true
-        miniUserNameLabel.rightAnchor.constraint(equalTo: showingUserInfoButton.rightAnchor, constant: 31).isActive = true
+        showingUserInfoButton.addSubview(miniUserNameLabel)
+        miniUserNameLabel.leftAnchor.constraint(equalTo: miniUserImage.rightAnchor, constant: 5).isActive = true
+        miniUserNameLabel.rightAnchor.constraint(equalTo: showingUserInfoButton.rightAnchor).isActive = true
+        miniUserNameLabel.centerYAnchor.constraint(equalTo: showingUserInfoButton.centerYAnchor).isActive = true
+        miniUserNameLabel.heightAnchor.constraint(equalToConstant: 17).isActive = true
+        miniUserNameLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showUserInfoView)))
+    
+        showingUserInfoButton.addSubview(arrow)
+        arrow.rightAnchor.constraint(equalTo: showingUserInfoButton.rightAnchor, constant: -15).isActive = true
+        arrow.centerYAnchor.constraint(equalTo: showingUserInfoButton.centerYAnchor).isActive = true
+        arrow.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showUserInfoView)))
     }
     
     fileprivate func setupUserInfoButtons() {
@@ -82,7 +131,7 @@ extension ViewController {
         stack.distribution = .fillEqually
                 
         stack.addArrangedSubview(resetPasswordButton)
-        stack.addArrangedSubview(logoutButton2)
+        stack.addArrangedSubview(logoutButton)
     }
     
     fileprivate func setupUserImageView() {
@@ -135,7 +184,7 @@ extension ViewController {
         userInfoView.addSubview(userPersonalInfoView)
         userPersonalInfoView.topAnchor.constraint(equalTo: userInfoView.topAnchor, constant: 21).isActive = true
         userPersonalInfoView.centerXAnchor.constraint(equalTo: userInfoView.centerXAnchor).isActive = true
-    
+        
         setupUserImageView()
         setupUserNameLabel()
         setupUserMailLabel()
@@ -173,6 +222,12 @@ extension ViewController {
         stack.addArrangedSubview(wonStrickeLabel)
     }
     
+    fileprivate func setupCreditsButton() {
+        topBarView.addSubview(creditsButton)
+        creditsButton.rightAnchor.constraint(equalTo: topBarView.rightAnchor, constant: -10).isActive = true
+        creditsButton.centerYAnchor.constraint(equalTo: topBarView.centerYAnchor).isActive = true
+    }
+    
     func setUpBackgroundImageView() {
         self.view.addSubview(backgroundImageView)
         backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
@@ -180,7 +235,7 @@ extension ViewController {
         backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         backgroundImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(test(gestureRecognizer:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserInfoView))
         backgroundImageView.addGestureRecognizer(tap)
         tap.delegate = self
     }
@@ -199,13 +254,13 @@ extension ViewController {
         playButton.backgroundColor = UIColor(white: 0, alpha: width == 10 ? 0.7 : 0)
         
         //Set up credits button
-        buttonsStackView.addArrangedSubview(creditsButton)
-        creditsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        creditsButton.backgroundColor = UIColor(white: 0, alpha: width == 10 ? 0.7 : 0)
+        buttonsStackView.addArrangedSubview(bluetoothButton)
+        bluetoothButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        bluetoothButton.backgroundColor = UIColor(white: 0, alpha: width == 10 ? 0.7 : 0)
         
         //Set up logout button
-        buttonsStackView.addArrangedSubview(logoutButton)
-        logoutButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        logoutButton.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        buttonsStackView.addArrangedSubview(howToButton)
+        howToButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        howToButton.backgroundColor = UIColor(white: 0, alpha: 0.7)
     }
 }
