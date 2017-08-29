@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8C0E2B9A1F34FE1B001105BB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */; };
 		8C0E2B9C1F34FE34001105BB /* RegisterViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */; };
+		8C27F3251F48A5870029646D /* ViewControllerGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C27F3241F48A5870029646D /* ViewControllerGestureRecognizerDelegate.swift */; };
 		8C2DE3261F38CBEF00569B44 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DE3251F38CBEF00569B44 /* Arrays.swift */; };
 		8C2F85B01F320A4C0019DA84 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F85AF1F320A4C0019DA84 /* TimerView.swift */; };
 		8C3D00F81F485CA100D6EC40 /* LoginMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D00F71F485CA100D6EC40 /* LoginMechanic.swift */; };
@@ -42,6 +43,7 @@
 		8303081B1A1C919E1932A306 /* Pods-BlackJack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlackJack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BlackJack/Pods-BlackJack.debug.xcconfig"; sourceTree = "<group>"; };
 		8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerLayer.swift; sourceTree = "<group>"; };
+		8C27F3241F48A5870029646D /* ViewControllerGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
 		8C2DE3251F38CBEF00569B44 /* Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrays.swift; sourceTree = "<group>"; };
 		8C2F85AF1F320A4C0019DA84 /* TimerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8C3D00F71F485CA100D6EC40 /* LoginMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginMechanic.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8C27F3231F48A56A0029646D /* delegates */ = {
+			isa = PBXGroup;
+			children = (
+				8C27F3241F48A5870029646D /* ViewControllerGestureRecognizerDelegate.swift */,
+			);
+			name = delegates;
+			sourceTree = "<group>";
+		};
 		8C3D00F61F485C7D00D6EC40 /* Mechanics */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 		8CAE54DC1F2FE53A00CA56C8 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8C27F3231F48A56A0029646D /* delegates */,
 				8C3D00F61F485C7D00D6EC40 /* Mechanics */,
 				8CF06F9C1F3F192E00E8F933 /* PlayersInGameFunctions */,
 				8CAE54DF1F2FE5FC00CA56C8 /* layers */,
@@ -340,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CB35A9F1F30BE980048C3A8 /* GameViewControllerLayer.swift in Sources */,
+				8C27F3251F48A5870029646D /* ViewControllerGestureRecognizerDelegate.swift in Sources */,
 				8C0E2B9C1F34FE34001105BB /* RegisterViewControllerLayer.swift in Sources */,
 				8C0E2B9A1F34FE1B001105BB /* RegisterViewController.swift in Sources */,
 				8C3D00F81F485CA100D6EC40 /* LoginMechanic.swift in Sources */,
