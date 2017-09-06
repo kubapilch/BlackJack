@@ -17,10 +17,12 @@
 		8C3D00FC1F485DDF00D6EC40 /* OpponentSearchingMechanics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D00FB1F485DDF00D6EC40 /* OpponentSearchingMechanics.swift */; };
 		8C3D00FE1F48632B00D6EC40 /* MenuMechanics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3D00FD1F48632B00D6EC40 /* MenuMechanics.swift */; };
 		8C466AE41F37B1D1005E5F70 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C466AE31F37B1D1005E5F70 /* CustomButton.swift */; };
+		8C4919131F5AFC6F0061B134 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4919121F5AFC6F0061B134 /* Font.swift */; };
 		8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A9ACA1F33B874007D112B /* LoginViewController.swift */; };
 		8C7C39741F4607B80099F92E /* MyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7C39731F4607B80099F92E /* MyCollectionView.swift */; };
 		8C85D8AB1F46271D00222444 /* CollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85D8AA1F46271D00222444 /* CollectionViewExtension.swift */; };
 		8C85D8AD1F46674300222444 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85D8AC1F46674300222444 /* MyCollectionViewCell.swift */; };
+		8CA2256B1F5856A100836EA9 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2256A1F5856A100836EA9 /* Reachability.swift */; };
 		8CAC02181F35D02C00642EB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */; };
 		8CAE54CB1F2FDD4800CA56C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */; };
 		8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54CC1F2FDD4800CA56C8 /* ViewController.swift */; };
@@ -29,6 +31,10 @@
 		8CAE54E11F2FE61600CA56C8 /* ViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAE54E01F2FE61600CA56C8 /* ViewControllerLayer.swift */; };
 		8CB35A9F1F30BE980048C3A8 /* GameViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB35A9E1F30BE980048C3A8 /* GameViewControllerLayer.swift */; };
 		8CB697421F314478000A0462 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB697411F314478000A0462 /* Card.swift */; };
+		8CBD2BC41F5DEB4B0090AEF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBD2BC31F5DEB4B0090AEF0 /* User.swift */; };
+		8CC2E0951F5DA0E600722F6D /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2E0941F5DA0E600722F6D /* RankingViewController.swift */; };
+		8CC2E0971F5DA10A00722F6D /* RankingViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2E0961F5DA10A00722F6D /* RankingViewControllerLayer.swift */; };
+		8CC2E0991F5DA13400722F6D /* RankingMechanics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC2E0981F5DA13400722F6D /* RankingMechanics.swift */; };
 		8CD979551F30792000190CB2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD979541F30792000190CB2 /* GameViewController.swift */; };
 		8CDC5A161F33C27100164C83 /* LoginViewControllerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */; };
 		8CF06F9E1F3F195C00E8F933 /* Serwer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF06F9D1F3F195C00E8F933 /* Serwer.swift */; };
@@ -51,10 +57,12 @@
 		8C3D00FB1F485DDF00D6EC40 /* OpponentSearchingMechanics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpponentSearchingMechanics.swift; sourceTree = "<group>"; };
 		8C3D00FD1F48632B00D6EC40 /* MenuMechanics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuMechanics.swift; sourceTree = "<group>"; };
 		8C466AE31F37B1D1005E5F70 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		8C4919121F5AFC6F0061B134 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		8C4A9ACA1F33B874007D112B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8C7C39731F4607B80099F92E /* MyCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionView.swift; sourceTree = "<group>"; };
 		8C85D8AA1F46271D00222444 /* CollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewExtension.swift; sourceTree = "<group>"; };
 		8C85D8AC1F46674300222444 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		8CA2256A1F5856A100836EA9 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		8CAC02171F35D02C00642EB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8CAE54C71F2FDD4800CA56C8 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAE54CA1F2FDD4800CA56C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +73,10 @@
 		8CAE54E01F2FE61600CA56C8 /* ViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLayer.swift; sourceTree = "<group>"; };
 		8CB35A9E1F30BE980048C3A8 /* GameViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewControllerLayer.swift; sourceTree = "<group>"; };
 		8CB697411F314478000A0462 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		8CBD2BC31F5DEB4B0090AEF0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8CC2E0941F5DA0E600722F6D /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
+		8CC2E0961F5DA10A00722F6D /* RankingViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewControllerLayer.swift; sourceTree = "<group>"; };
+		8CC2E0981F5DA13400722F6D /* RankingMechanics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingMechanics.swift; sourceTree = "<group>"; };
 		8CD979541F30792000190CB2 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewControllerLayer.swift; sourceTree = "<group>"; };
 		8CF06F9D1F3F195C00E8F933 /* Serwer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serwer.swift; sourceTree = "<group>"; };
@@ -108,6 +120,7 @@
 				8C3D00F91F485D0800D6EC40 /* RegisterMechanics.swift */,
 				8C3D00FB1F485DDF00D6EC40 /* OpponentSearchingMechanics.swift */,
 				8C3D00FD1F48632B00D6EC40 /* MenuMechanics.swift */,
+				8CC2E0981F5DA13400722F6D /* RankingMechanics.swift */,
 			);
 			name = Mechanics;
 			sourceTree = "<group>";
@@ -163,6 +176,7 @@
 				8CDC5A151F33C27100164C83 /* LoginViewControllerLayer.swift */,
 				8C0E2B9B1F34FE34001105BB /* RegisterViewControllerLayer.swift */,
 				8C85D8AA1F46271D00222444 /* CollectionViewExtension.swift */,
+				8CC2E0961F5DA10A00722F6D /* RankingViewControllerLayer.swift */,
 			);
 			name = layers;
 			sourceTree = "<group>";
@@ -175,6 +189,7 @@
 				8C466AE31F37B1D1005E5F70 /* CustomButton.swift */,
 				8C7C39731F4607B80099F92E /* MyCollectionView.swift */,
 				8C85D8AC1F46674300222444 /* MyCollectionViewCell.swift */,
+				8CBD2BC31F5DEB4B0090AEF0 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -186,6 +201,7 @@
 				8CD979541F30792000190CB2 /* GameViewController.swift */,
 				8C4A9ACA1F33B874007D112B /* LoginViewController.swift */,
 				8C0E2B991F34FE1B001105BB /* RegisterViewController.swift */,
+				8CC2E0941F5DA0E600722F6D /* RankingViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -204,6 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				8C2DE3251F38CBEF00569B44 /* Arrays.swift */,
+				8CA2256A1F5856A100836EA9 /* Reachability.swift */,
+				8C4919121F5AFC6F0061B134 /* Font.swift */,
 			);
 			name = "Swift components extensions";
 			sourceTree = "<group>";
@@ -358,6 +376,8 @@
 				8CB697421F314478000A0462 /* Card.swift in Sources */,
 				8C2F85B01F320A4C0019DA84 /* TimerView.swift in Sources */,
 				8CD979551F30792000190CB2 /* GameViewController.swift in Sources */,
+				8CBD2BC41F5DEB4B0090AEF0 /* User.swift in Sources */,
+				8CC2E0951F5DA0E600722F6D /* RankingViewController.swift in Sources */,
 				8C4A9ACB1F33B874007D112B /* LoginViewController.swift in Sources */,
 				8CAE54CD1F2FDD4800CA56C8 /* ViewController.swift in Sources */,
 				8CF06FA01F3F197700E8F933 /* Client.swift in Sources */,
@@ -370,9 +390,13 @@
 				8CDC5A161F33C27100164C83 /* LoginViewControllerLayer.swift in Sources */,
 				8C2DE3261F38CBEF00569B44 /* Arrays.swift in Sources */,
 				8C85D8AD1F46674300222444 /* MyCollectionViewCell.swift in Sources */,
+				8C4919131F5AFC6F0061B134 /* Font.swift in Sources */,
 				8C3D00FC1F485DDF00D6EC40 /* OpponentSearchingMechanics.swift in Sources */,
 				8C7C39741F4607B80099F92E /* MyCollectionView.swift in Sources */,
 				8CAE54E11F2FE61600CA56C8 /* ViewControllerLayer.swift in Sources */,
+				8CC2E0991F5DA13400722F6D /* RankingMechanics.swift in Sources */,
+				8CA2256B1F5856A100836EA9 /* Reachability.swift in Sources */,
+				8CC2E0971F5DA10A00722F6D /* RankingViewControllerLayer.swift in Sources */,
 				8CF06F9E1F3F195C00E8F933 /* Serwer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

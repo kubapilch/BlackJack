@@ -18,12 +18,12 @@ extension ViewController {
         resizeButton()
     
         howToButton.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        howToButton.setText(text: "How to play")
+        howToButton.setText(text: "Bluetooth")
     }
     
     fileprivate func showLoadingView() {
         SVProgressHUD.show(withStatus: "Looking for opponent..")
-        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setDefaultStyle(.light)
         
         resizeButton()
         
@@ -59,6 +59,10 @@ extension ViewController {
     }
     
     func handlePlay() {
+        //Check connection
+        let connection = checkIfHasInternet()
+        guard connection == true else{return}
+        
         //Make play button non interactive
         playButton.isUserInteractionEnabled = false
         
@@ -143,6 +147,9 @@ extension ViewController {
         let ref = Database.database().reference().child("queue").child(withUid)
         ref.updateChildValues(["waiting":false, "connector":userUid!])
         
+        //Set deadline timer
+        afkChecker()
+        
         //Iterrator
         var number = 0
         
@@ -156,6 +163,9 @@ extension ViewController {
                 //Waiting status changed
                 number += 1
             }else if number == 2 {
+                //Opponent is not afk
+                self.opponentFoundIsAFK = false
+                
                 //Game room reference
                 self.roomReference = (snapshot.value as! String)
                 
@@ -164,6 +174,32 @@ extension ViewController {
                 ref.removeValue()
             }
         })
+    }
+    
+    func afkChecker() {
+        guard opponentFoundIsAFK != false else{return}
+        
+        let time = DispatchTime.now() + 10
+        DispatchQueue.main.asyncAfter(deadline: time) { 
+            //Remove user queue and observers
+            let ref = Database.database().reference().child("queue").child(self.opponentUid!)
+            ref.removeValue()
+            ref.removeAllObservers()
+            
+            //Dissmiss loading views and make play button clickable again
+            self.dissmissLoadingView()
+            self.playButton.isUserInteractionEnabled = true
+            
+            //Show message that opponent has left
+            let time1 = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: time1, execute: { 
+                SVProgressHUD.showError(withStatus: "Opponent has lef")
+            })
+            let time = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: time, execute: { 
+                SVProgressHUD.dismiss()
+            })
+        }
     }
     
     func handleCancel() {

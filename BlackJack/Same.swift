@@ -10,11 +10,60 @@ import UIKit
 import Firebase
 import Foundation
 import SVProgressHUD
+import SDWebImage
+import Firebase
 
 extension GameViewController {
    
+    fileprivate func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+
+    func setPlayersImages() {
+        let playerImageRef = Storage.storage().reference().child("profiles_images/\(playerUid!).jpg")
+        let opponentImageRef = Storage.storage().reference().child("profiles_images/\(opponentUid!).jpg")
+        
+        playerImageRef.downloadURL { (url, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            print("Download Started")
+            self.getDataFromUrl(url: url!) { (data, response, error)  in
+                guard let data = data, error == nil else { return }
+                print("Download Finished")
+                DispatchQueue.main.async() { () -> Void in
+                    let image = UIImage(data: data)
+                    self.playerProfileImageView.image = image
+                }
+            }
+        }
+        
+        opponentImageRef.downloadURL { (url, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            print("Download Started")
+            self.getDataFromUrl(url: url!) { (data, response, error)  in
+                guard let data = data, error == nil else { return }
+                print("Download Finished")
+                DispatchQueue.main.async() { () -> Void in
+                    let image = UIImage(data: data)
+                    self.opponentProfileImageView.image = image
+                }
+            }
+        }
+        
+    }
+    
     func updateUserInfo(didWon:Bool,didHaveMax:Bool) {
-        let userRef = Database.database().reference().child("users").child((Auth.auth().currentUser?.uid)!)
+        let uid = (Auth.auth().currentUser?.uid)!
+        let userRef = Database.database().reference().child("users").child(uid)
         
         userRef.observeSingleEvent(of: .value, with: { (snapshot) in
             var data = snapshot.value as! [String:String]
@@ -26,6 +75,7 @@ extension GameViewController {
                 
                 let handsWon = Int(data["HandsWon"]!)! + 1
                 data["HandsWon"] = String(handsWon)
+                self.saveScoreToTopScoresInDatabase(score: handsWon)
                 
                 let currentStrick = Int(data["CurrentWonStricke"]!)! + 1
                 data["CurrentWonStricke"] = String(currentStrick)
@@ -42,8 +92,23 @@ extension GameViewController {
                  data["CurrentWonStricke"] = "0"
             }
             
+            self.updateInfoLocaly(uid: uid, values: data)
             userRef.updateChildValues(data)
         })
+    }
+    
+    func updateInfoLocaly(uid:String,values:[String:String]) {
+        
+        guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else{return}
+        let fileUrl = documentDirectoryUrl.appendingPathComponent("\(uid).json")
+        
+        //Save to file
+        do{
+            let data = try JSONSerialization.data(withJSONObject: values, options: [])
+            try data.write(to: fileUrl)
+        }catch{
+            print(error)
+        }
     }
     
     func showThatPlayerWin(didHaveMax:Bool) {
@@ -134,6 +199,11 @@ extension GameViewController {
         }
     }
     
+    func saveScoreToTopScoresInDatabase(score:Int) {
+        let topRef = Database.database().reference().child("top")
+        topRef.updateChildValues([score:playerUid!])
+    }
+    
     func stopUserTimer() {
         playerTimer.alpha = 0
         playerTimerReference?.invalidate()
@@ -170,8 +240,28 @@ extension GameViewController {
             opponentTimer.time = opponentTimer.time! - 1
         }else {
             stopOpponentTimer()
+            afkChecker()
         }
     }
+    
+    fileprivate func afkChecker() {
+        let time = DispatchTime.now() + 8
+        DispatchQueue.main.asyncAfter(deadline: time) { 
+            
+            guard self.opponnentIsAFK != false else{return}
+            
+            SVProgressHUD.showError(withStatus: "Opponent has left!")
+            //Remove game room
+            self.ref?.removeAllObservers()
+            self.ref?.removeValue()
+            let time = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                SVProgressHUD.dismiss()
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
+    }
+    
     
     private func setThatUserIsReady() {
         if side == .server {

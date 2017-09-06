@@ -46,8 +46,16 @@ extension LoginViewController {
     func setUpButtons() {
         setUpLoginButton()
         seUpRegisterButton()
+        setupResetPasswordButton()
     }
-
+    
+    fileprivate func setupResetPasswordButton() {
+        self.view.addSubview(resetPasswordButton)
+        resetPasswordButton.topAnchor.constraint(equalTo: passwordLine.bottomAnchor, constant: 10).isActive = true
+        resetPasswordButton.leftAnchor.constraint(equalTo: passwordLine.leftAnchor).isActive = true
+        resetPasswordButton.rightAnchor.constraint(equalTo: passwordLine.rightAnchor).isActive = true
+    }
+    
     func addTextFields() {
         self.view.addSubview(mailField)
         mailField.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true

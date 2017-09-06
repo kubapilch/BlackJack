@@ -8,8 +8,48 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
-class RegisterViewController: UIViewController, UITextFieldDelegate {
+class RegisterViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    //
+    //Variables
+    //
+    
+    //Image Picker
+    let imagePickerReference = UIImagePickerController()
+    
+    
+    
+    let imagePicker: UIImageView = {
+        var customView = UIImageView()
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        customView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        customView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        customView.layer.cornerRadius = 40
+        customView.clipsToBounds = true
+        customView.contentMode = .scaleToFill
+        customView.image = UIImage(named: "user")
+        customView.layer.borderWidth = 0.5
+        customView.layer.borderColor = UIColor.black.cgColor
+        return customView
+    }()
+    
+    let imageLine: UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor.white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        return view
+    }()
+    
+    let backgroundView: UIView = {
+        var customView = UIView()
+        customView.backgroundColor = UIColor(white: 0, alpha: 0.6)
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        customView.heightAnchor.constraint(equalToConstant: 455).isActive = true
+        return customView
+    }()
     
     let backButton: UIButton = {
         var but = UIButton()
@@ -117,14 +157,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
-    let backgroundView: UIImageView = {
-        var view = UIImageView()
-        view.image = UIImage(named: "list")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentMode = .scaleAspectFill
-        return view
-    }()
-    
     let backImage: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(named: "menuBackgroundImage")
@@ -135,6 +167,45 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     func goBack() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func test() {
+        print("test")
+    }
+    
+    func pickImage() {
+        imagePickerReference.allowsEditing = true
+        imagePickerReference.sourceType = .photoLibrary
+    
+        present(imagePickerReference, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imagePicker.image = image
+        } else{
+            print("Something went wrong")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func checkIfHasInternet() -> Bool {
+        if Reachability.isConnectedToNetwork() {
+            return true
+        }else {
+            SVProgressHUD.showError(withStatus: "Problemms with connection!")
+            SVProgressHUD.setDefaultStyle(.light)
+            let time = DispatchTime.now() + 2
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                SVProgressHUD.dismiss()
+            })
+            return false
+        }
     }
     
     override func viewDidLoad() {
@@ -150,10 +221,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
         addBackButton()
         
+        SVProgressHUD.setDefaultStyle(.light)
+        
         //Set delegates
         self.nameField.delegate = self
         self.mailField.delegate = self
         self.passwordField.delegate = self
         self.passwordFieldConfirm.delegate = self
+        imagePickerReference.delegate = self
     }
 }

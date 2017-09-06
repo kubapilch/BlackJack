@@ -64,6 +64,7 @@ extension GameViewController {
                 self.winner = data
                 num += 1
             }else {
+                self.opponnentIsAFK = false
                 let data = snapshot.value as! Bool
                 self.ref?.child("winner").removeAllObservers()
                 self.showResults(data: self.winner, didHaveMax: data)
@@ -94,6 +95,22 @@ extension GameViewController {
     }
     
     func waitForCards() {
+        //AFK checker
+        let time = DispatchTime.now() + 10
+        DispatchQueue.main.asyncAfter(deadline: time) { 
+            guard self.opponentIsAFKStarting != false else{return}
+            
+            SVProgressHUD.showError(withStatus: "Opponent has left!")
+            //Remove game room
+            self.ref?.removeAllObservers()
+            self.ref?.removeValue()
+            let time = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                SVProgressHUD.dismiss()
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
+        
         let deckRef = ref?.child("deck")
         deckRef?.observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot.value!)
@@ -104,6 +121,7 @@ extension GameViewController {
                 print("\(card.rank!) card rank and \(card.name!) name")
                 self.cards.append(card)
             }
+            self.opponentIsAFKStarting = false
             self.takeTwoFirstCardsForPlayerAsClient()
             self.takeNextTwoCardsForPlayerAsSerwer()
             self.getPlayerOneOnTableCards()

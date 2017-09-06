@@ -50,7 +50,20 @@ extension GameViewController {
         //Set opponnt card view
         setOpponentStartCards()
     }
-     
+    
+    
+    func setupPlayersImagesViews() {
+        //Player image view
+        self.view.addSubview(playerProfileImageView)
+        playerProfileImageView.bottomAnchor.constraint(equalTo: bottomBarView.topAnchor, constant: -10).isActive = true
+        playerProfileImageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
+        
+        //Opponent image view
+        self.view.addSubview(opponentProfileImageView)
+        opponentProfileImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 15).isActive = true
+        opponentProfileImageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+    }
+    
     private func addOpponentStartCardsToOpponentCardView() {
         for i in 0...1 {
             let card = Card()

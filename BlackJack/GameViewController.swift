@@ -21,6 +21,10 @@ class GameViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     //Clients variables
     var winner: String?
     
+    //AFK variables
+    var opponnentIsAFK:Bool?
+    var opponentIsAFKStarting:Bool?
+    
     //CollectionViews
     var playerCollectionView: UICollectionView!
     var opponentCollectionView: MyCollectionView!
@@ -59,6 +63,32 @@ class GameViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         }
     }
     
+    //Players profiles images
+    let playerProfileImageView: UIImageView = {
+        var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.image = UIImage(named: "user")
+        imageView.layer.cornerRadius = 40
+        imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor.black.cgColor
+        return imageView
+    }()
+    
+    let opponentProfileImageView: UIImageView = {
+        var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.image = UIImage(named: "user")
+        imageView.layer.cornerRadius = 40
+        imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor.black.cgColor
+        return imageView
+    }()
     
     //Players names labels
     let userLabel: UILabel = {
@@ -159,6 +189,9 @@ class GameViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         //Set up timers
         setUpTimers()
         
+        //Set up players images views
+        setupPlayersImagesViews()
+        
         //Set all tarter cards
         setUpAllStartCardsViews()
     
@@ -170,6 +203,8 @@ class GameViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         setupPlayerCollectionView()
     
         setupOpponentCollectionView()
+    
+        setPlayersImages()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

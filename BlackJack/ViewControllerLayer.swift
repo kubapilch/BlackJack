@@ -11,7 +11,7 @@ import UIKit
 extension ViewController {
     
     func resizeButton() {
-        if howToButton.titleLabel?.text == "How to play"{
+        if howToButton.titleLabel?.text == "Bluetooth"{
             makeItSmaller()
         }else {
             makeItBigger()
@@ -91,6 +91,103 @@ extension ViewController {
         }, completion: nil)
     }
     
+    func showCreditsView() {
+        setupCreditsView()
+        creditsView.alpha = 0
+        creditsViewBackButton.alpha = 0
+        
+        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseIn, animations: { 
+            
+            self.creditsView.alpha = 1
+            self.creditsViewBackButton.alpha = 1
+            self.topBarView.alpha = 0
+            self.buttonsStackView.alpha = 0
+            
+        }, completion: nil)
+    }
+    
+    func hideCreditsView() {
+        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseOut, animations: {
+            self.creditsView.alpha = 0
+            self.creditsViewBackButton.alpha = 0
+            self.topBarView.alpha = 1
+            self.buttonsStackView.alpha = 1
+        }, completion: { (finished) in
+            if finished {
+                self.creditsView.removeFromSuperview()
+                self.creditsViewBackButton.removeFromSuperview()
+            }
+        })
+    }
+    
+    fileprivate func setupCreditsView() {
+        self.view.addSubview(creditsView)
+        creditsView.widthAnchor.constraint(equalToConstant: 290).isActive = true
+        creditsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        creditsView.heightAnchor.constraint(equalToConstant: 170).isActive = true
+        creditsView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        
+        //Back button
+        self.view.addSubview(creditsViewBackButton)
+        creditsViewBackButton.topAnchor.constraint(equalTo: creditsView.bottomAnchor, constant: -11).isActive = true
+        creditsViewBackButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        creditsViewBackButton.centerXAnchor.constraint(equalTo: creditsView.centerXAnchor).isActive = true
+        creditsViewBackButton.widthAnchor.constraint(equalToConstant: 290).isActive = true
+        
+        //Credits label
+        creditsView.addSubview(creditsInViewLabel)
+        creditsInViewLabel.topAnchor.constraint(equalTo: creditsView.topAnchor, constant: 10).isActive = true
+        creditsInViewLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        creditsInViewLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        creditsInViewLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        //Line
+        creditsView.addSubview(creditsLine)
+        creditsLine.topAnchor.constraint(equalTo: creditsInViewLabel.bottomAnchor, constant: 10).isActive = true
+        creditsLine.centerXAnchor.constraint(equalTo: creditsView.centerXAnchor).isActive = true
+        creditsLine.leftAnchor.constraint(equalTo: creditsView.leftAnchor, constant: 20).isActive = true
+        creditsLine.rightAnchor.constraint(equalTo: creditsView.rightAnchor, constant: -20).isActive = true
+        
+        
+        //Jakub Pilch labels
+        creditsView.addSubview(jakubPilchLabel)
+        jakubPilchLabel.topAnchor.constraint(equalTo: creditsLine.bottomAnchor, constant: 10).isActive = true
+        jakubPilchLabel.rightAnchor.constraint(equalTo: creditsLine.rightAnchor).isActive = true
+        jakubPilchLabel.widthAnchor.constraint(equalToConstant: 95).isActive = true
+        jakubPilchLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+        creditsView.addSubview(jakubPilchRoleLabel)
+        jakubPilchRoleLabel.rightAnchor.constraint(equalTo: jakubPilchLabel.leftAnchor, constant: -5).isActive = true
+        jakubPilchRoleLabel.leftAnchor.constraint(equalTo: creditsLine.leftAnchor).isActive = true
+        jakubPilchRoleLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        jakubPilchRoleLabel.centerYAnchor.constraint(equalTo: jakubPilchLabel.centerYAnchor).isActive = true
+        
+        //Szymon zimecki labels
+        creditsView.addSubview(szymonZimeckiLabel)
+        szymonZimeckiLabel.topAnchor.constraint(equalTo: jakubPilchLabel.bottomAnchor, constant:10).isActive = true
+        szymonZimeckiLabel.rightAnchor.constraint(equalTo: creditsLine.rightAnchor).isActive = true
+        szymonZimeckiLabel.widthAnchor.constraint(equalToConstant: 135).isActive = true
+        szymonZimeckiLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        creditsView.addSubview(szymonZimeckiRoleLabel)
+        szymonZimeckiRoleLabel.rightAnchor.constraint(equalTo: szymonZimeckiLabel.leftAnchor, constant: -5).isActive = true
+        szymonZimeckiRoleLabel.leftAnchor.constraint(equalTo: creditsLine.leftAnchor).isActive = true
+        szymonZimeckiRoleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        szymonZimeckiRoleLabel.centerYAnchor.constraint(equalTo: szymonZimeckiLabel.centerYAnchor).isActive = true
+        
+        //Mateusz bączek label
+        creditsView.addSubview(mateuszBaczekLabel)
+        mateuszBaczekLabel.topAnchor.constraint(equalTo: szymonZimeckiLabel.bottomAnchor, constant: 10).isActive = true
+        mateuszBaczekLabel.rightAnchor.constraint(equalTo: creditsLine.rightAnchor).isActive = true
+        mateuszBaczekLabel.widthAnchor.constraint(equalToConstant: 185).isActive = true
+        mateuszBaczekLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        creditsView.addSubview(mateuszBaczekRoleLabel)
+        mateuszBaczekRoleLabel.rightAnchor.constraint(equalTo: mateuszBaczekLabel.leftAnchor, constant: -5).isActive = true
+        mateuszBaczekRoleLabel.leftAnchor.constraint(equalTo: creditsLine.leftAnchor).isActive = true
+        mateuszBaczekRoleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        mateuszBaczekRoleLabel.centerYAnchor.constraint(equalTo: mateuszBaczekLabel.centerYAnchor).isActive = true
+    }
     
     fileprivate func setupUserInfoShowButton() {
         topBarView.addSubview(showingUserInfoButton)
@@ -104,7 +201,9 @@ extension ViewController {
         miniUserImage.topAnchor.constraint(equalTo: topBarView.topAnchor).isActive = true
         miniUserImage.leftAnchor.constraint(equalTo: self.topBarView.leftAnchor, constant: 0).isActive = true
         miniUserImage.widthAnchor.constraint(equalToConstant: 52).isActive = true
-    
+        miniUserImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pickImage)))
+        miniUserImage.isUserInteractionEnabled = true
+        
         showingUserInfoButton.addSubview(miniUserNameLabel)
         miniUserNameLabel.leftAnchor.constraint(equalTo: miniUserImage.rightAnchor, constant: 5).isActive = true
         miniUserNameLabel.rightAnchor.constraint(equalTo: showingUserInfoButton.rightAnchor).isActive = true
@@ -138,6 +237,8 @@ extension ViewController {
         userPersonalInfoView.addSubview(userImage)
         userImage.topAnchor.constraint(equalTo: userPersonalInfoView.topAnchor).isActive = true
         userImage.leftAnchor.constraint(equalTo: userPersonalInfoView.leftAnchor).isActive = true
+        userImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pickImage)))
+        userImage.isUserInteractionEnabled = true
     }
     
     fileprivate func setupUserNameLabel() {

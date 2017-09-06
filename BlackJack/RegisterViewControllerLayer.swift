@@ -25,10 +25,11 @@ extension RegisterViewController {
     
     func setUpBackView() {
         self.view.addSubview(backgroundView)
-        backgroundView.widthAnchor.constraint(equalToConstant: 312).isActive = true
-        backgroundView.heightAnchor.constraint(equalToConstant: 359).isActive = true
-        backgroundView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        backgroundView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 15).isActive = true
+        backgroundView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -15).isActive = true
         backgroundView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    
+        setupImageViewPicker()
     }
 
     func addBackButton() {
@@ -40,7 +41,7 @@ extension RegisterViewController {
     func addAllTextFieldsAndLines() {
         //Name textField
         self.view.addSubview(nameField)
-        nameField.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 35).isActive = true
+        nameField.topAnchor.constraint(equalTo: imageLine.bottomAnchor, constant: 20).isActive = true
         nameField.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
         
         //Name Line
@@ -78,10 +79,25 @@ extension RegisterViewController {
         confirmPasswordLine.topAnchor.constraint(equalTo: passwordFieldConfirm.bottomAnchor, constant: 2).isActive = true
         confirmPasswordLine.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
     }
+
+    fileprivate func setupImageViewPicker() {
+        //Image
+        backgroundView.addSubview(imagePicker)
+        imagePicker.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+        imagePicker.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 25).isActive = true
+        imagePicker.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pickImage)))
+        imagePicker.isUserInteractionEnabled = true
+        
+        //Image line
+        self.view.addSubview(imageLine)
+        imageLine.widthAnchor.constraint(equalTo: backgroundView.widthAnchor, constant: -40).isActive = true
+        imageLine.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+        imageLine.topAnchor.constraint(equalTo: imagePicker.bottomAnchor, constant: 25).isActive = true
+    }
     
     func addRegisterButton() {
         self.view.addSubview(registerButton)
-        registerButton.topAnchor.constraint(equalTo: confirmPasswordLine.bottomAnchor, constant: 20).isActive = true
+        registerButton.topAnchor.constraint(equalTo: confirmPasswordLine.bottomAnchor, constant: 25).isActive = true
         registerButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
     }
 

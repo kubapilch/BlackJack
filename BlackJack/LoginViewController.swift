@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -26,7 +27,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.contentMode = .scaleAspectFill
         return view
     }()
-      
+    
+    let resetPasswordButton:UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.clear
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Forgot password?", for: .normal)
+        button.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.titleLabel?.textAlignment = .right
+        button.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        return button
+    }()
+    
     let mailLine: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor.white
@@ -98,6 +111,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         present(registerView, animated: true, completion: nil)
     }
     
+    func checkIfHasInternet() -> Bool {
+        if Reachability.isConnectedToNetwork() {
+            return true
+        }else {
+            SVProgressHUD.showError(withStatus: "Problemms with connection!")
+            SVProgressHUD.setDefaultStyle(.light)
+            let time = DispatchTime.now() + 2
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                SVProgressHUD.dismiss()
+            })
+            return false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpBackImageView()
@@ -110,5 +137,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
         self.mailField.delegate = self
         self.passwordField.delegate = self
+    
+        SVProgressHUD.setDefaultStyle(.light)
     }
 }

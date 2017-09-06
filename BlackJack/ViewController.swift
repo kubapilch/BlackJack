@@ -10,11 +10,17 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //Constraints
     var topConstraint:NSLayoutConstraint?
     var showed:Bool?
+    
+    //Image Picker
+    let imagePickerReference = UIImagePickerController()
+    
+    //AFK checks variables
+    var opponentFoundIsAFK:Bool?
     
     //Side type and variable
     enum type {
@@ -52,7 +58,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         var label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Games played:12"
+        label.text = "Games played:0"
         label.heightAnchor.constraint(equalToConstant: 13).isActive = true
         return label
     }()
@@ -61,7 +67,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         var label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Games won: 10"
+        label.text = "Games won:0"
         label.heightAnchor.constraint(equalToConstant: 13).isActive = true
         return label
     }()
@@ -89,7 +95,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         label.font = UIFont.systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        label.text = "21 points times:1"
+        label.text = "21 points times:0"
         return label
     }()
     
@@ -98,7 +104,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         label.font = UIFont.systemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        label.text = "Registered:14.07.2017"
+        label.text = "Registered:00.00.0000"
         return label
     }()
     
@@ -111,7 +117,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let miniUserNameLabel: UILabel = {
         var label = UILabel()
-        label.text = "Kuba Pilch"
+        label.text = "User"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 18)
@@ -152,6 +158,90 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return imageView
     }()
     
+    let creditsView:UIView = {
+        let customView = UIView()
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        customView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        customView.layer.cornerRadius = 10
+        customView.clipsToBounds = true
+        return customView
+    }()
+    
+    let creditsViewBackButton:UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.black
+        button.setTitle("Back", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(hideCreditsView), for: .touchUpInside)
+        return button
+    }()
+    
+    let creditsInViewLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Credits"
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let creditsLine:UIView = {
+        var customView = UIView()
+        customView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        customView.backgroundColor = UIColor.black
+        return customView
+    }()
+    
+    let jakubPilchLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Jakub Pilch"
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let szymonZimeckiLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Szymon Zimecki"
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let mateuszBaczekLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Mateusz Bączek"
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let jakubPilchRoleLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Programmer, designer"
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let szymonZimeckiRoleLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Second designer"
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let mateuszBaczekRoleLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Backend"
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let topBarView: UIView = {
         var customView = UIView()
         customView.heightAnchor.constraint(equalToConstant: 52).isActive = true
@@ -172,6 +262,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         but.setTitle("i", for: .normal)
         but.setTitleColor(.black, for: .normal)
         but.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        but.addTarget(self, action: #selector(showCreditsView), for: .touchUpInside)
         return but
     }()
     
@@ -193,7 +284,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         var label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Kuba Pilch"
+        label.text = "User"
         label.textAlignment = .left
         return label
     }()
@@ -203,7 +294,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.text = "Kuba.pilch2001@gmail.com"
+        label.text = "user@example.com"
         return label
     }()
     
@@ -228,6 +319,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         button.titleLabel?.textColor = UIColor.white
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         button.setTitle("Reset Password", for: .normal)
+        button.addTarget(self, action: #selector(resetPassword), for: .touchUpInside)
         button.heightAnchor.constraint(equalToConstant: 22).isActive = true
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
@@ -279,14 +371,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let bluetoothButton: CustomButton = {
         var button = CustomButton()
-        button.setText(text: "Bluetooth")
+        button.setText(text: "Ranking")
         button.color = UIColor.black
+        button.addTarget(self, action: #selector(showRanking), for: .touchUpInside)
         return button
     }()
     
     let howToButton: CustomButton = {
         var button = CustomButton()
-        button.setText(text: "How to play")
+        button.setText(text: "Bluetooth")
         button.color = UIColor.black
         button.addTarget(self, action: #selector(handleHowToOrCancle), for: .touchUpInside)
         return button
@@ -300,6 +393,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return button
     }()
 
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            miniUserImage.image = image
+            userImage.image = image
+            changeProfileImage()
+        } else{
+            print("Something went wrong")
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Hide top bar
@@ -314,6 +422,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         setupUserInfoContainerView()
         sertupTopBarView()
+        
+        //Delegates
+        imagePickerReference.delegate = self
         
         if let user = Auth.auth().currentUser?.uid {
             userUid = user

@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import SVProgressHUD
 
 extension GameViewController {
     
@@ -32,6 +32,7 @@ extension GameViewController {
             print("Get player one card number \(num)")
             num += 1
             if num == 1 {
+                self.opponentIsAFKStarting = false
                 self.startOpponentTimer()
                 self.removeObserverFromStartingCards()
             }
@@ -47,6 +48,7 @@ extension GameViewController {
                 self.getDeck()
                 self.startUserTimer()
                 self.stopOpponentTimer()
+                self.opponnentIsAFK = false
             }
         })
     }
@@ -253,6 +255,24 @@ extension GameViewController {
         sendDeckToFirebase()
     }
     
+    fileprivate func afkAfterDeckSendChecker() {
+        //AFK checker
+        let time = DispatchTime.now() + 10
+        DispatchQueue.main.asyncAfter(deadline: time) {
+            guard self.opponentIsAFKStarting != false else{return}
+            
+            SVProgressHUD.showError(withStatus: "Opponent has left!")
+            //Remove game room
+            self.ref?.removeAllObservers()
+            self.ref?.removeValue()
+            let time = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: time, execute: {
+                SVProgressHUD.dismiss()
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
+    }
+    
     private func sendDeckToFirebase() {
         var cardsToSend = [String:String]()
         var num = 0
@@ -263,6 +283,7 @@ extension GameViewController {
         let deckRef = ref?.child("deck")
         deckRef?.updateChildValues(cardsToSend)
         
+        afkAfterDeckSendChecker()
         waitForPlayerTwoTakeStartingCards()
         waitForPlayerTwoTakeStartingCardsForServer()
         getPlayerTwoOnTableCards()
